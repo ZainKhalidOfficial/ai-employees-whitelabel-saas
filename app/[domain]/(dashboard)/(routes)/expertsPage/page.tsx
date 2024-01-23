@@ -11,9 +11,9 @@ import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
-import { useProModal } from "@/hooks/use-pro-modal";
+// import { useProModal } from "@/hooks/use-pro-modal";
 
-import { ChatCompletionRequestMessage } from "openai";
+import  ChatCompletionRequestMessage  from "openai";
 import { Empty } from "@/components/empty";
 import { Loader } from "@/components/loader";
 import { cn } from "@/lib/utils";
@@ -32,7 +32,11 @@ import { NextRequest } from "next/server";
 import { cookies } from 'next/headers'
 import  jwt  from "jsonwebtoken";
 
-
+interface GPTCHAT {
+    role: "user" | "system"; 
+    content: string;
+  }
+  
 interface ExpertsPageProps {
     searchParams: {
         categoryId: string;

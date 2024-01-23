@@ -1,4 +1,4 @@
-import { getDataFromToken } from "@/app/helpers/getDataFromToken";
+import { getUserToken } from "@/app/helpers/getUserToken";
 import { NextRequest,NextResponse } from "next/server";
 import { TenantUser } from "@prisma/client";
 import prisma from "@/lib/prisma";
@@ -8,9 +8,9 @@ export async function GET(request:NextRequest) {
 
     try {
         
-        const userId = await getDataFromToken(request);
+        const userToken = await getUserToken();
         const user = await prisma.tenantUser.findUnique({
-            where: {id: userId},
+            where: {id: userToken?.user.id},
            
             // select: {
             //     id: true,

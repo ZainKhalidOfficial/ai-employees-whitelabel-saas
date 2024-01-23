@@ -12,9 +12,9 @@ import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
-import { useProModal } from "@/hooks/use-pro-modal";
+// import { useProModal } from "@/hooks/use-pro-modal";
 
-import { ChatCompletionRequestMessage } from "openai";
+import  ChatCompletionRequestMessage  from "openai";
 import { Empty } from "@/components/empty";
 import { Loader } from "@/components/loader";
 import { cn } from "@/lib/utils";
@@ -24,12 +24,16 @@ import { toast } from "react-hot-toast";
 import { error } from "console";
 
 
+interface GPTCHAT {
+    role: "user" | "system"; 
+    content: string;
+  }
 
 const ConversationPage = () => {
-    const proModal = useProModal();
+    // const proModal = useProModal();
 
     const router = useRouter();
-    const [messages, setMessages] = useState<ChatCompletionRequestMessage[]>([])
+    const [messages, setMessages] = useState<GPTCHAT[]>([])
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -44,7 +48,7 @@ const ConversationPage = () => {
         
         try {
        
-            const userMessage: ChatCompletionRequestMessage = {
+            const userMessage: GPTCHAT = {
                 role: "user",
                 content: values.prompt,
             };
@@ -63,7 +67,8 @@ const ConversationPage = () => {
         catch (error: any) {
             console.log(error);
             if(error?.response?.status === 403) {
-                proModal.onOpen();
+                toast.error("Not Subscribed!");
+                // proModal.onOpen();
             } else {
                 toast.error("Something went wrong");
             }
@@ -154,7 +159,7 @@ const ConversationPage = () => {
                             : "bg-muted"
                             )}
                             >
-                                {message.role === "user" ? <UserAvatar /> : <BotAvatar />}
+                                {message.role === "user" ?  <BotAvatar /> : <BotAvatar />}  {/*<UserAvatar />*/}
                                 <p className="text-sm">
                                 {message.content}
                                 </p>

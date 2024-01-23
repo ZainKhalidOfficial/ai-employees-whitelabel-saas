@@ -49,7 +49,7 @@ export default async function SiteHomePage({
 
   const domain = decodeURIComponent(params.domain);
 
-  const [data, posts] = await Promise.all([  //[data, posts] 
+  const [data]= await Promise.all([  //[data, posts] 
     getSiteData(domain),
     // getPostsForSite(domain),
   ]);
@@ -60,7 +60,22 @@ export default async function SiteHomePage({
 
 
 
+  const planData = {
+    silverPackagePrice: data?.silverPackagePrice,
+    silverTokens:data?.silverTokens,
+    silverBusinessProfiles:data?.silverBusinessProfiles,
+    silverCustomEmployees:data?.silverCustomEmployees,
+    
+    goldPackagePrice:data?.goldPackagePrice,
+    goldTokens:data?.goldTokens,
+    goldBusinessProfiles:data?.goldBusinessProfiles,
+    goldCustomEmployees:data?.goldCustomEmployees,
 
+    platinumPackagePrice:data?.platinumPackagePrice,
+    platinumTokens:data?.platinumTokens,
+    platinumBusinessProfiles:data?.platinumBusinessProfiles,
+    platinumCustomEmployees:data?.platinumCustomEmployees
+    }
   
     return ( 
        <div className="h-full">
@@ -74,7 +89,7 @@ export default async function SiteHomePage({
             <p className="text-lg ">or</p>
             <p className="font-bold text-5xl ">Monthly Pricing</p>
         </div>
-        <SubscriptionPlan isPro={{ isPro: false, tokens: 0 }} disabled={true} />
+        <SubscriptionPlan  isPro= {{ isPro: false, tokens: 0 }}  disabled={true} planData={planData}/>
 
         <FAQSection />
         </div>

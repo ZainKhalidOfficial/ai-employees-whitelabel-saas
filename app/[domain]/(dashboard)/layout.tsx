@@ -43,7 +43,7 @@ const DashboardLayout = async ({
         return new NextResponse("Unauthorized", { status: 401 });
     }
 
-    const [data, posts] = await Promise.all([  //[data, posts] 
+    const [data] = await Promise.all([  //[data, posts] 
     getSiteData(String(domainName.hostname)), //?.value
   ]);
 

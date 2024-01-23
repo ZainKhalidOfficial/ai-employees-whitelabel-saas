@@ -16,11 +16,11 @@ import { useState } from "react";
 import { Empty } from "@/components/empty";
 import { Loader } from "@/components/loader";
 import { cn } from "@/lib/utils";
-import { useProModal } from "@/hooks/use-pro-modal";
+// import { useProModal } from "@/hooks/use-pro-modal";
 import { toast } from "react-hot-toast";
 
 const MusicPage = () => {
-    const proModal = useProModal();
+    // const proModal = useProModal();
 
     const router = useRouter();
     const [music, setMusic] = useState<string>()
@@ -48,7 +48,8 @@ const MusicPage = () => {
             
              console.log(error);
             if(error?.response?.status === 403) {
-                proModal.onOpen();
+                // proModal.onOpen();
+                toast.error("Not Subscribed!");
             } else {
                 toast.error("Something went wrong");
             }

@@ -23,9 +23,9 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { useProModal } from "@/hooks/use-pro-modal";
+// import { useProModal } from "@/hooks/use-pro-modal";
 
-import { ChatCompletionRequestMessage } from "openai";
+import  ChatCompletionRequestMessage  from "openai";
 import { Empty } from "@/components/empty";
 import { Loader } from "@/components/loader";
 import { cn } from "@/lib/utils";
@@ -38,6 +38,11 @@ import { BeatLoader } from "react-spinners";
 import { useTheme } from "next-themes";
 import { ExpertChatParameters } from "@/components/expert-chat-select-business";
 
+interface GPTCHAT {
+    role: "user" | "system"; 
+    content: string;
+  }
+  
 
 interface ExpertChatClientProps {
 
@@ -60,7 +65,7 @@ export const ExpertChatClient = ({
     user,
 }: ExpertChatClientProps) => {
     
-    const proModal = useProModal();
+    // const proModal = useProModal();
 
     const { theme } = useTheme();
 
@@ -68,7 +73,7 @@ export const ExpertChatClient = ({
     const searchParams = useSearchParams()
     
  
-    const [messages, setMessages] = useState<ChatCompletionRequestMessage[]>([])
+    const [messages, setMessages] = useState<GPTCHAT[]>([])
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -84,7 +89,7 @@ export const ExpertChatClient = ({
         
         try {
 
-            const userMessage: ChatCompletionRequestMessage = {
+            const userMessage: GPTCHAT = {
                 role: "user",
                 content: values.prompt,
             };
@@ -105,7 +110,8 @@ export const ExpertChatClient = ({
         catch (error: any) {
             console.log("Zain Error : ",error);
             if(error?.response?.status === 403) {
-                proModal.onOpen();
+                toast.error("Not Subscribed!");
+                // proModal.onOpen();
             } else {
                 toast.error("Something went wrong");
             }
@@ -232,7 +238,7 @@ export const ExpertChatClient = ({
                             : "bg-muted"
                             )}
                             >
-                                {message.role === "user" ? <UserAvatar user={user} /> :<ExpertBotAvatar src={expert.src} />}
+                                {message.role === "user" ? <ExpertBotAvatar src={expert.src} />:<ExpertBotAvatar src={expert.src} />} {/*<UserAvatar user={user} /> */}
                                 <p className="text-sm">
                                 {message.content}
                                 </p>

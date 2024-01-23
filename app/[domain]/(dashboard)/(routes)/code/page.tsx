@@ -14,20 +14,25 @@ import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import ReactMarkdown from "react-markdown";
 
-import { ChatCompletionRequestMessage } from "openai";
+import  ChatCompletionRequestMessage  from "openai";
 import { Empty } from "@/components/empty";
 import { Loader } from "@/components/loader";
 import { cn } from "@/lib/utils";
 import { UserAvatar } from "@/components/user-avatar";
 import { BotAvatar } from "@/components/bot-avatar";
-import { useProModal } from "@/hooks/use-pro-modal";
+// import { useProModal } from "@/hooks/use-pro-modal";
 import { toast } from "react-hot-toast";
 
+interface GPTCHAT {
+    role: "user" | "system"; 
+    content: string;
+  }
+
 const CodePage = () => {
-    const proModal = useProModal();
+    // const proModal = useProModal();
  
     const router = useRouter();
-    const [messages, setMessages] = useState<ChatCompletionRequestMessage[]>([])
+    const [messages, setMessages] = useState<GPTCHAT[]>([])
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -41,7 +46,7 @@ const CodePage = () => {
     const onSubmit = async (values : z.infer<typeof formSchema>) => {
         
         try {
-            const userMessage: ChatCompletionRequestMessage = {
+            const userMessage:GPTCHAT = {  //ChatCompletionRequestMessage
                 role: "user",
                 content: values.prompt,
             };
@@ -59,7 +64,8 @@ const CodePage = () => {
         catch (error: any) {
             
             if(error?.response?.status === 403) {
-                proModal.onOpen();
+                // proModal.onOpen();
+                toast.error("Not subscribed!");
             } else {
                 toast.error("Something went wrong");
             }
@@ -148,7 +154,7 @@ const CodePage = () => {
                             : "bg-muted"
                             )}
                             >
-                                {message.role === "user" ? <UserAvatar /> : <BotAvatar />}
+                                {message.role === "user" ? <BotAvatar /> : <BotAvatar />} {/*<UserAvatar />*/}
                                 
                                 <ReactMarkdown
                                 components={{

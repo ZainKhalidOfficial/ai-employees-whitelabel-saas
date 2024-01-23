@@ -19,11 +19,11 @@ export const increaseApiLimit = async () => {
     if (userApiLimit) {
         await prisma.userApiLimit.update({
             where: {userid: userId},
-            data: {count: userApiLimit.count + 1},
+            data: {tokensUsed: userApiLimit.tokensUsed + 1},
         });
     } else {
         await prisma.userApiLimit.create({
-            data: { userid: userId, count: 1 }
+            data: { userid: userId, tokensUsed: 1 }
         });
     }
 };
@@ -41,7 +41,7 @@ export const checkApiLimit = async () => {
         }
     });
 
-    if (!userApiLimit || userApiLimit.count < MAX_FREE_COUNT)
+    if (!userApiLimit || userApiLimit.tokensUsed < MAX_FREE_COUNT)
     {
         return true;
     } else {
@@ -71,5 +71,5 @@ export const getApiLimitCount = async () => {
         return 0
     }
 
-    return userApiLimit.count;
+    return userApiLimit.tokensUsed;
 }

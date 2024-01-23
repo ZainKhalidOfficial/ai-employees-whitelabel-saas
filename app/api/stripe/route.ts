@@ -70,7 +70,7 @@ export async function POST(
         // const settingsUrl = `http://${domainName.hostname}/settings`;
         // console.log("Zain settingsUrl = ", settingsUrl);
 
-        const [data, posts] = await Promise.all([  //[data, posts] 
+        const [data] = await Promise.all([  //[data, posts] 
              getSiteData(domainName.hostname),
             ]);
 

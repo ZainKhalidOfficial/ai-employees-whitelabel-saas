@@ -36,7 +36,7 @@ export async function POST(req: Request) {
 
     console.log("Zain Webhook Test : ", hostname)
 
-//     const [data, posts] = await Promise.all([  //[data, posts] 
+//     const  = await Promise.all([  // 
 //          getSiteData(hostname), //domainName.hostname
 //         ]);
 

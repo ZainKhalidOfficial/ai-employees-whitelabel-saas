@@ -9,7 +9,7 @@ import { ExpertBotAvatar } from "@/components/expert-bot-avatar";
 // import { useUser } from "@clerk/nextjs";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { useToast } from "@/components/ui/use-toast";
-import prismadb from "@/lib/prismadb";
+// import prismadb from "@/lib/prismadb";
 import qs from "query-string";
 
 const models = [

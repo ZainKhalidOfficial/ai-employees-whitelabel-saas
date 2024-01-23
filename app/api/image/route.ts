@@ -69,7 +69,7 @@ export async function POST(
         //TODO: Modify this increase Api limit function to be dynamic in reducing tokens
         if(!isPro)
         {
-            await increaseApiLimit();
+            await increaseApiLimit('tokens');
         }
 
 

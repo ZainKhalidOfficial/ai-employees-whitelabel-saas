@@ -64,7 +64,8 @@ export default function Home() {
             <p className="font-bold text-5xl ">Monthly Pricing</p>
         </div>
         
-      <SubscriptionPlan  />
+      {/* <SubscriptionPlan  /> */}
+
       {/* <Blog /> */}
       <Contact />
     </>

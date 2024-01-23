@@ -21,20 +21,20 @@ interface SubscriptionPlanProps {
     disabled: boolean;
 
     planData: {
-        silverPackagePrice: number;
-        silverTokens:number;
-        silverBusinessProfiles:number;
-        silverCustomEmployees:number;
+        silverPackagePrice: number | undefined;
+        silverTokens:number | undefined;
+        silverBusinessProfiles:number | undefined;
+        silverCustomEmployees:number | undefined;
         
-        goldPackagePrice:number;
-        goldTokens:number;
-        goldBusinessProfiles:number;
-        goldCustomEmployees:number;
+        goldPackagePrice:number | undefined;
+        goldTokens:number| undefined;
+        goldBusinessProfiles:number| undefined;
+        goldCustomEmployees:number| undefined;
     
-        platinumPackagePrice:number;
-        platinumTokens:number;
-        platinumBusinessProfiles:number;
-        platinumCustomEmployees:number;
+        platinumPackagePrice:number| undefined;
+        platinumTokens:number| undefined;
+        platinumBusinessProfiles:number| undefined;
+        platinumCustomEmployees:number| undefined;
     }
 };   
 

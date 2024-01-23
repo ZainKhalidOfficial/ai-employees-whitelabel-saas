@@ -9,14 +9,13 @@ export const getDataFromToken = async (request: NextRequest) => {
     
         // const decodedToken: any = jwt.verify(token, process.env.JWT_SECRET!);
         const { payload, protectedHeader } = await jwtVerify(token , new TextEncoder().encode(process.env.JWT_SECRET!) )
-       
-        return {user:payload}; //decodedToken.id; currently returning whole token
+        return payload; //decodedToken.id; currently returning whole token
         
     } catch (error: any) {
 
-        // throw new Error(error.message);
+        throw new Error(error.message);
         console.log("Error from lib/getDataFromToken : ",error)
-        return null;
+        // return null;
         
     }
 }
