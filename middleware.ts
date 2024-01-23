@@ -18,7 +18,7 @@ export const config = {
 
   ],
 };
-
+  const nothing = "";
 export async function middleware(req: NextRequest) {
   const url = req.nextUrl;
 
