@@ -18,7 +18,7 @@ export const config = {
 
   ],
 };
-  const nothing = "";
+  
 export async function middleware(req: NextRequest) {
   const url = req.nextUrl;
 
@@ -35,12 +35,13 @@ export async function middleware(req: NextRequest) {
     searchParams.length > 0 ? `?${searchParams}` : ""
   }`;
 
-  
+
   
   // rewrites for app pages
   if (hostname == `app.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`) {
     
   //  const session = await getToken({ req });
+  
       const session = await getDataFromToken(req);
       
     if (!session && !(path == "/login" || path == "/signup")) {

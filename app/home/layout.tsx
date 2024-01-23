@@ -21,9 +21,10 @@ const LandingLayout = ({
     return ( 
         <main className="h-full overflow-auto ${inter.className}" suppressHydrationWarning>
 
-            <Header />
+            {/* <Header /> */}
             {children}
-            <Footer />
+            {/* <Footer /> */}
+            
             {/* <ScrollToTop /> */}
 
 
