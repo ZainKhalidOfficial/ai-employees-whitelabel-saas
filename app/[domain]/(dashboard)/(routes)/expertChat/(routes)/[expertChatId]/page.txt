@@ -1,0 +1,51 @@
+import prismadb from "@/lib/prismadb";
+import { auth, redirectToSignIn } from "@clerk/nextjs";
+import { redirect } from "next/navigation";
+import { ExpertChatClient } from "./components/client";
+
+interface ExpertChatIdProps {
+    params: {
+        expertChatId: string;
+    }
+}
+
+const ExpertChatId = async ({
+    params
+}: ExpertChatIdProps) => {
+
+    const { userId } = auth();
+
+    if(!userId) {
+        return redirectToSignIn();
+    }
+
+    const expert = await prismadb.companion.findUnique({
+        where: {
+            id: params.expertChatId
+        },
+        include: {
+            messages: {
+                orderBy: {
+                    createdAt: "asc"
+                },
+                where: {
+                    userId,
+                }
+            },
+            _count: {
+                select: {
+                    messages: true
+                }
+            }
+        }
+    });
+
+    if(!expert) {
+        return redirect("/dashboard")
+    }
+    return ( 
+        <ExpertChatClient expert={expert} />
+     );
+}
+ 
+export default ExpertChatId;

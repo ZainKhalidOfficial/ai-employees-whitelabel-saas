@@ -1,0 +1,174 @@
+import { StreamingTextResponse, LangChainStream } from "ai";
+import { auth, currentUser } from "@clerk/nextjs";
+import { CallbackManager } from "langchain/callbacks";
+import { Replicate } from "langchain/llms/replicate";
+import { NextResponse } from "next/server";
+
+import { MemoryManager } from "@/lib/memory";
+import { rateLimit } from "@/lib/rate-limit";
+import prismadb from "@/lib/prismadb";
+import { use } from "react";
+
+export async function POST(
+    request: Request,
+    { params }: { params: { expertChatId: string } }
+  ) {
+    try {
+        const { prompt } = await request.json();
+        const user = await currentUser();
+
+        if( !user || !user.firstName || !user.id) {
+            return new NextResponse("Unauthorized", { status: 401 });
+        }
+
+        console.log("Reached 1 ");
+
+        const identifier = request.url + "-" + user.id;
+        const { success } =await rateLimit(identifier);
+
+        if(!success) {
+            return new NextResponse("Rate limit exceeded", { status: 429 });
+        }
+
+        console.log("Reacched 2 ");
+
+        const companion = await prismadb.companion.update({
+            where: {
+                id: params.expertChatId,
+            },
+            data: {
+                messages: {
+                    create: {
+                        content: prompt,
+                        role: "user",
+                        userId: user.id,
+                    }
+                }
+            }
+        });
+
+        if(!companion) {
+            return new NextResponse("Companion not found", { status: 404 });
+        }
+
+        console.log("Reacched 3 ");
+
+        const name = companion.id;
+        const companion_file_name = name + ".txt";
+
+        const companionKey = {
+            companionName: name,
+            userId: user.id,
+            modelName: "gpt",
+        };
+
+        console.log("Reacched 4 ");
+
+        const memoryManager = await MemoryManager.getInstance();
+        console.log("Reacched 5 ");
+
+        const records = await memoryManager.readLatestHistory(companionKey);
+
+        console.log("Reacched 6 ");
+        if(records.length === 0) {
+            await memoryManager.seedChatHistory(companion.seed, "\n\n", companionKey);
+        }
+
+        console.log("Reacched 7 ");
+        await memoryManager.writeToHistory("User: "+ prompt + "\n", companionKey);
+
+        console.log("Reacched 8 ");
+        const recentChatHistory = await memoryManager.readLatestHistory(companionKey);
+
+        console.log("Reacched 9 ");
+        const similarDocs = await memoryManager.vectorSearch(
+            recentChatHistory,
+            companion_file_name,
+        );
+
+        console.log("Reacched 10 ");
+
+        let relevantHistory = "";
+
+        if(!!similarDocs && similarDocs.length !== 0) {
+            relevantHistory = similarDocs.map((doc) => doc.pageContent).join("\n");
+        }
+
+        console.log("Reacched 11 ");
+        const { handlers } = LangChainStream();
+
+        console.log("Reacched 12 ");
+
+        const model = new Replicate({
+            model: "meta/llama-2-13b-chat:f4e2de70d66816a838a89eeeb621910adffb0dd0baba3976c96980970978018d",
+            input: {
+                max_length: 2048,
+            },
+            apiKey: process.env.REPLICATE_API_TOKEN,
+            callbacks: CallbackManager.fromHandlers(handlers),
+        });
+
+        console.log("Reacched 13 ");
+
+        model.verbose = true;
+
+        const resp = String(
+            await model
+            .call(
+                `
+                ONLY generate plain sentences without prefix of who is speaking. DO NOT use ${name} : prefix.
+
+                ${companion.instructions}
+
+                Below are the relevent details about ${name}'s past and the conversation you are in.
+                ${relevantHistory}
+
+                ${recentChatHistory}\n${name}:
+                `
+            )
+            .catch(console.error)
+        );
+
+        console.log("Reacched 14 ");
+
+        const cleaned = resp.replaceAll(",", "");
+        const chunks = cleaned.split("\n");
+        const response = chunks[0];
+
+        await memoryManager.writeToHistory("" + response.trim(), companionKey);
+        var Readable = require("stream").Readable;
+
+        console.log("Reacched 15 ");
+        let s = new Readable();
+        s.push(response);
+        s.push(null);
+
+        console.log("Reacched 16 ");
+        if(response !== undefined && response.length > 1) {
+            memoryManager.writeToHistory("" + response.trim(), companionKey);
+
+            await prismadb.companion.update({
+                where: {
+                    id: params.expertChatId,
+                },
+                data: {
+                    messages: {
+                        create: {
+                            content: response.trim(),
+                            role: "system",
+                            userId: user.id
+                        }
+                    }
+                }
+            })
+        };
+
+        console.log("Reacched 17 ");
+
+        return new StreamingTextResponse(s);
+
+    } catch (error) {
+        console.log("[EXPERT_CHAT_POST]", error);
+        return new NextResponse("Internal Error", { status: 500});
+    }
+}
