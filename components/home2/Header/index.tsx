@@ -42,7 +42,7 @@ const Header = () => {
 
   const usePathName = usePathname();
   const signup = () => {
-    router.push(`${process.env.NEXTAUTH_URL}`);
+    router.push('/signup');
   }
 
   return (

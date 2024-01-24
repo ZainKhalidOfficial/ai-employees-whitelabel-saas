@@ -24,7 +24,7 @@ export default function Home() {
   return (
     <>
       {/* <ScrollUp /> */}
-      {/* <Hero /> */}
+      <Hero />
 
       {/* <Video /> */}
       {/* <Features /> */}
@@ -35,14 +35,14 @@ export default function Home() {
       <p className="text-lg mt-4 ">Users can create personalized AI agents that can answer questions, have pre-knowledge of their businesses and more.</p>         
         </div>
 
-      {/* <AboutSectionOne /> */}
+      <AboutSectionOne />
 
       <div className="grid grid-cols-1 mt-10  text-center ">
       <p className="font-bold text-5xl">Fully <p className="text-transparent bg-clip-text  bg-gradient-to-r from-pink-500 via-purple-400 to-indigo-500 inline">White Label AI </p> SAAS 📋</p>
       <p className="text-lg mt-4 ">Rebrand the entire Genius AI platform as your own SaaS and sell directly to your clients.</p>         
         </div>
 
-      {/* <AboutSectionTwo /> */}
+      <AboutSectionTwo />
 
       <div className="grid grid-cols-1  text-center ">
       <p className="font-bold text-5xl">More than just <p className="text-transparent bg-clip-text  bg-gradient-to-r from-pink-500 via-purple-400 to-indigo-500 inline">AI Chatbots </p> 🤖</p>
