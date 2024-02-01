@@ -12,7 +12,10 @@ import Testimonials from "@/components/home2/Testimonials";
 import Video from "@/components/home2/Video";
 import { LandingContent } from "@/components/landing-content";
 import { SubscriptionPlan } from "@/components/subscription-plan";
+import { WhitelabelSubscriptionPlan } from "@/components/whitelabel-subscription-plan";
 import { Metadata } from "next";
+import React, { useState, useEffect } from 'react';
+import prisma from "@/lib/prisma";
 
 export const metadata: Metadata = {
   title: "Whitelabel Genius",
@@ -20,7 +23,51 @@ export const metadata: Metadata = {
   // other metadata
 };
 
-export default function Home() {
+interface PlanData {
+  id: string;
+  userId: string;
+
+  mStartupSitesAllowed: number;
+  mStartupCustomEmployees: number;
+  mStartupCustomDomains: string;
+  mStartupPrice: number;
+  
+  yStartupSitesAllowed: number;
+  yStartupCustomEmployees: number;
+  yStartupCustomDomains: string;
+  yStartupPrice: number;
+
+  mMidsizeSitesAllowed: number;
+  mMidsizeCustomEmployees: number;
+  mMidsizeCustomDomains: string;
+  mMidsizePrice: number;
+
+  yMidsizeSitesAllowed: number;
+  yMidsizeCustomEmployees: number;
+  yMidsizeCustomDomains: string;
+  yMidsizePrice: number;
+
+  mEnterpriseSitesAllowed: number;
+  mEnterpriseCustomEmployees: number;
+  mEnterpriseCustomDomains: string;
+  mEnterprisePrice: number;
+  
+  yEnterpriseSitesAllowed: number;
+  yEnterpriseCustomEmployees: number;
+  yEnterpriseCustomDomains: string;
+  yEnterprisePrice: number;
+}
+export default async function Home() {
+
+
+        const pathData = await prisma.whitelabelSubscriptionPlan.findUnique({
+          where: {
+            userId: "admin"
+          }
+        });
+
+
+
   return (
     <>
       {/* <ScrollUp /> */}
@@ -30,46 +77,49 @@ export default function Home() {
       {/* <Features /> */}
       {/* <Brands /> */}
 
-      <div className="grid grid-cols-1  text-center ">
-      <p className="font-bold text-5xl">More than just <p className="text-transparent bg-clip-text  bg-gradient-to-r from-pink-500 via-purple-400 to-indigo-500 inline">AI Chatbots </p> 🤖</p>
-      <p className="text-lg mt-4 ">Users can create personalized AI agents that can answer questions, have pre-knowledge of their businesses and more.</p>         
+      <div id="features" className="grid grid-cols-1  text-center ">
+      <p className="font-bold text-3xl md:text-4xl">More than just <span className="text-transparent bg-clip-text  bg-gradient-to-r from-pink-500 via-purple-400 to-indigo-500 inline">AI Chatbots </span> 🤖</p>
+      <p className="text-md md:text-lg m-4 ">Users can create personalized AI agents that can answer questions, have pre-knowledge of their businesses and more.</p>         
         </div>
 
       <AboutSectionOne />
 
       <div className="grid grid-cols-1 mt-10  text-center ">
-      <p className="font-bold text-5xl">Fully <p className="text-transparent bg-clip-text  bg-gradient-to-r from-pink-500 via-purple-400 to-indigo-500 inline">White Label AI </p> SAAS 📋</p>
-      <p className="text-lg mt-4 ">Rebrand the entire Genius AI platform as your own SaaS and sell directly to your clients.</p>         
+      <p className="font-bold text-3xl md:text-4xl">Fully <span className="text-transparent bg-clip-text  bg-gradient-to-r from-pink-500 via-purple-400 to-indigo-500 inline">White Label AI </span> SAAS 📋</p>
+      <p className="text-md md:text-lg m-4 ">Rebrand the entire Genius AI platform as your own SaaS and sell directly to your clients.</p>         
         </div>
 
       <AboutSectionTwo />
 
       <div className="grid grid-cols-1  text-center ">
-      <p className="font-bold text-5xl">More than just <p className="text-transparent bg-clip-text  bg-gradient-to-r from-pink-500 via-purple-400 to-indigo-500 inline">AI Chatbots </p> 🤖</p>
-      <p className="text-lg mt-4 ">Users can create personalized AI agents that can answer questions, have pre-knowledge of their businesses and more.</p>         
+      <p className="font-bold text-3xl md:text-4xl">More than just <span className="text-transparent bg-clip-text  bg-gradient-to-r from-pink-500 via-purple-400 to-indigo-500 inline">AI Chatbots </span> 🤖</p>
+      <p className="text-md md:text-lg m-4 ">Users can create personalized AI agents that can answer questions, have pre-knowledge of their businesses and more.</p>         
         </div>
 
-      {/* <AboutSectionOne /> */}
+      <AboutSectionOne />
 
-      <div className="grid grid-cols-1  text-center ">
-      <p className="font-bold text-5xl ">Main Features</p>
-      <p className="text-lg mt-4 ">Genius packs a wide varienty of features among which following are our top offerings.</p>         
-        </div>
+      {/* <div className="grid grid-cols-1  text-center ">
+      <p className="font-bold text-3xl md:text-4xl ">Main Features</p>
+      <p className="text-md md:text-lg m-4 ">Genius packs a wide varienty of features among which following are our top offerings.</p>         
+        </div> */}
+
       {/* <LandingContent /> 
       <Testimonials /> */}
 
   
 
-      <div className="grid grid-cols-1  text-center py-20 ">
-            <p className="text-lg ">Sign-up today with a free trial</p>
-            <p className="text-lg ">or</p>
-            <p className="font-bold text-5xl ">Monthly Pricing</p>
+      <div id="pricing" className="grid grid-cols-1  text-center py-20 ">
+            <p className="text-md md:text-lg">Sign-up today with a free trial</p>
+            <p className="text-md md:text-lg">or</p>
+            <p className="font-bold text-3xl md:text-4xl">Monthly Pricing</p>
         </div>
+
         
-      {/* <SubscriptionPlan  /> */}
+        
+        <WhitelabelSubscriptionPlan isPro={{isPro: false, tokens: 0}} disabled={true} planData={pathData}/>
 
    
-      {/* <Contact /> */}
+      <Contact />
     </>
   );
 }

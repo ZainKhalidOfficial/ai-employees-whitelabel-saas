@@ -164,7 +164,7 @@ export const WhitelabelSubscriptionPlan =({
         console.log('Contacting 1!')
     if(disabled)
     { console.log('Contacting! 2')
-        router.push('/sign-up');   
+        router.push(`http://app.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`);   
     } else {
         console.log('Contacting!')
         let planSelected = {};

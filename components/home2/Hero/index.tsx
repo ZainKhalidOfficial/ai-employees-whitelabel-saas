@@ -52,7 +52,7 @@ const Hero = () => {
                     />
                 </div>
 
-                <p className="text-gray-500 sm:text-sm md:text-lg">
+                <p className="text-gray-500 text-lg md:text-xl lg:text-xl xl:text-xl">
                 Genius is built for AI Agencies who want to White Label AI solutions for their clients,
                 without having to spend the time or money to build it out themselves.
                 </p> 
@@ -63,7 +63,7 @@ const Hero = () => {
                     href={`http://app.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`}
                     className="rounded-sm bg-primary px-8 py-4 text-base font-semibold text-white duration-300 ease-in-out hover:bg-primary/80"
                   >
-                    Start free trial 
+                    Sign In 
                   </Link>
 
                 </div>

@@ -117,7 +117,7 @@ export default function LoginForm () {
                                   <FormLabel>Email</FormLabel>
                                   <FormControl>
                                   <Input
-                                  className="text-white"
+                                  className="text-black"
                                   disabled={isLoading}
                                   placeholder={"Enter your email address"}
                                   {...field}
@@ -140,7 +140,7 @@ export default function LoginForm () {
                                   <FormLabel>Password</FormLabel>
                                   <FormControl>
                                   <Input
-                                  className=" text-white"
+                                  className=" text-black"
                                   disabled={isLoading}
                                   placeholder={"Enter your Password"}
                                   {...field}

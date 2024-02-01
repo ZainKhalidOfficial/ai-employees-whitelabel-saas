@@ -10,6 +10,7 @@ import Header from "@/components/home2/Header";
 
 // import "node_modules/react-modal-video/css/modal-video.css";
 import "@/styles1/index.css";
+import ScrollToTop from "@/components/home2/ScrollToTop";
 
 
 const LandingLayout = ({
@@ -21,10 +22,10 @@ const LandingLayout = ({
     return ( 
         <main className="h-full overflow-auto ${inter.className}" suppressHydrationWarning>
 
-            {/* <Header /> */}
+            <Header />
             {children}
-            {/* <Footer /> */}
-            
+            <Footer />
+
             {/* <ScrollToTop /> */}
 
 
