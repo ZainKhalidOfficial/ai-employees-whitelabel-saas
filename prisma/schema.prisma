@@ -219,6 +219,7 @@ model TenantUser {
   username     String  @unique
   email        String  @unique
   password     String
+  image        String?
   isVerified   Boolean @default(false)
   isAdmin      Boolean @default(false)
   forgotPasswordToken String @default("")

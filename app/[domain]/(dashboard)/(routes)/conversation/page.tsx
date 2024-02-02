@@ -11,7 +11,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import  ChatCompletionRequestMessage  from "openai";
 import { Empty } from "@/components/empty";
@@ -21,6 +21,7 @@ import { UserAvatar } from "@/components/user-avatar";
 import { BotAvatar } from "@/components/bot-avatar";
 import { toast } from "react-hot-toast";
 import { error } from "console";
+import { getDataFromToken } from "@/app/helpers/getDataFromToken";
 
 
 interface GPTCHAT {
@@ -31,6 +32,13 @@ interface GPTCHAT {
 const ConversationPage = () => {
 
     const router = useRouter();
+
+    let user : any = "iuser";
+
+    useEffect(() => {
+        let user = axios.get('api/authusers/me');
+    },[]);
+
     const [messages, setMessages] = useState<GPTCHAT[]>([])
 
     const form = useForm<z.infer<typeof formSchema>>({
@@ -157,7 +165,7 @@ const ConversationPage = () => {
                             : "bg-muted"
                             )}
                             >
-                                {message.role === "user" ?  <BotAvatar /> : <BotAvatar />}  {/*<UserAvatar />*/}
+                                {message.role === "user" ?  <UserAvatar user={user}/> : <BotAvatar />}  
                                 <p className="text-sm">
                                 {message.content}
                                 </p>

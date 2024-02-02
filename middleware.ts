@@ -66,22 +66,17 @@ export async function middleware(req: NextRequest) {
   }
 
   // rewrite everything else to `/[domain]/[slug] dynamic route
-
-  // const session = await getToken({ req });
   
-    const token = req.cookies.get('token')?.value || '';
-    let decodedToken: any = "";
-
-
-    try {
+    // const token = req.cookies.get('token')?.value || '';
+    // let decodedToken: any = "";
+   
         // decodedToken = jwt.verify(token , process.env.JWT_SECRET!)
-        decodedToken = await jwtVerify(token , new TextEncoder().encode(process.env.JWT_SECRET!) )
+        // decodedToken = await jwtVerify(token , new TextEncoder().encode(process.env.JWT_SECRET!) )
+    let session = await getDataFromToken(req);
         // console.log("data : ", decodedToken.id);
     
-    } catch (error) { 
-        console.log("Custom Auth failed exception @ middleware: ",error);
 
-        if ( path == "/login" || path == "/signup" || path ==  "/") {
+    if (!session &&  (path == "/login" || path == "/signup" || path ==  "/")) {
           const response = NextResponse.rewrite(new URL(`/${hostname}${path}`, req.url));
 
            //encrypt domainName
@@ -90,7 +85,8 @@ export async function middleware(req: NextRequest) {
 
           return response;
         } 
-        else {
+        else if (!session)
+         {
           const response = NextResponse.rewrite(new URL(`/${hostname}/login`, req.url));
 
            //encrypt domainName
@@ -100,11 +96,8 @@ export async function middleware(req: NextRequest) {
           return response;
         }
 
-        
-        // router.push("/login");
-    }
 
-  if (token && (path == "/login" || path == "/signup" || path ==  "/")) {
+  if (session && (path == "/login" || path == "/signup" || path ==  "/")) {
     return NextResponse.redirect(new URL(`/${hostname}/dashboard`, req.url));
   } 
 

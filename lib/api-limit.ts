@@ -8,6 +8,7 @@ import { redirect } from "next/navigation";
 import { getSession } from "@/lib/auth";
 import { cookies } from "next/headers";
 import  jwt  from "jsonwebtoken";
+import { getUserToken } from "@/app/helpers/getUserToken";
 
 export const increaseApiLimit = async (type: string) => {
 
@@ -183,20 +184,19 @@ export const getApiLimitCount = async () => {
     let decodedToken: any = "";
 
     try {
-        const token = cookies().get('token')?. value || '';
 
-        decodedToken = jwt.verify(token , process.env.JWT_SECRET!)
-        // console.log("data : ", decodedToken.id);
+        decodedToken = await getUserToken();
+        
     
     } catch (error) { 
-        console.log("Custom Auth failed exception getApiLimitCount function: ",error);
+        console.log("Custom Auth actually failed at exception getApiLimitCount function: ",error);
         return { tokensUsed:0, businessProfilesUsed:0 ,customEmployeesUsed:0 };
      
     }
 
     const userApiLimit = await prisma.userApiLimit.findUnique({
         where: {
-            userid: decodedToken.id
+            userid: decodedToken.user.id
         }
     });
 

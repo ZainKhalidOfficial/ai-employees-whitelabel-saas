@@ -58,7 +58,13 @@ const ExpertsPage =async ({
             categoryId: searchParams.categoryId,
             name: {
                 search: searchParams.name
-            }
+            },
+            OR: [
+                {userId: userToken?.user.id},
+                {userId: 'admin'}
+            ]
+            
+            
         },
         orderBy: {
             createdAt: "desc"

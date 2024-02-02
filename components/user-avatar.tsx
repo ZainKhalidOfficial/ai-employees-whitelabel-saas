@@ -4,7 +4,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { User } from "@prisma/client"
 
 interface UserAvatarProps {
-    user: User;
+    user: User | null;
 };
 
 

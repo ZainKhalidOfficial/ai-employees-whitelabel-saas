@@ -5,6 +5,7 @@ import { ExpertChatClient } from "./components/client";
 import { redirect } from "next/navigation";
 import { cookies } from "next/headers";
 import  jwt  from "jsonwebtoken";
+import { getUserToken } from "@/app/helpers/getUserToken";
 
 interface ExpertChatIdProps {
     params: {
@@ -16,28 +17,12 @@ const ExpertChatId = async ({
     params
 }: ExpertChatIdProps) => {
 
-    // const { userId } = auth();
 
-    // if(!userId) {
-    //     return redirectToSignIn();
-    // }
-
-    let decodedToken: any = "";
-
-    try {
-        const token = cookies().get('token')?. value || '';
-
-        decodedToken = jwt.verify(token , process.env.JWT_SECRET!)
-        // console.log("data : ", decodedToken.id);
-    
-    } catch (error) { 
-        console.log("Custom Auth failed exception at expertChat page.tsx : ",error)
-        // router.push("/login");
-    }
+    const userData = getUserToken();
 
     const expert = await prisma.companion.findUnique({
         where: {
-            id: params.expertChatId
+            id: params.expertChatId,
         },
         include: {
             messages: {
@@ -45,7 +30,8 @@ const ExpertChatId = async ({
                     createdAt: "asc"
                 },
                 where: {
-                    userId : decodedToken.id,
+                    userId : userData?.user.id,
+                    // userId: 'admin'
                 }
             },
             _count: {
@@ -58,7 +44,7 @@ const ExpertChatId = async ({
 
     const businessProfiles = await prisma.businessProfile.findMany({
         where: {
-            userId: decodedToken.id
+            userId: userData?.user.id,
         },
     });
 
@@ -66,7 +52,7 @@ const ExpertChatId = async ({
         return redirect("/dashboard")
     }
     return ( 
-        <ExpertChatClient expert={expert} businessProfiles={businessProfiles} user={decodedToken} />
+        <ExpertChatClient expert={expert} businessProfiles={businessProfiles} user={userData?.user} />
      );
 }
  
