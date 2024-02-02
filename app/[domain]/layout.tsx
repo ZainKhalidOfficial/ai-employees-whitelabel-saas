@@ -11,8 +11,7 @@ import { Metadata } from "next";
 import './globals.css'
 // import type { Metadata } from 'next'
 // import { Inter } from 'next/font/google'
-import { ClerkProvider } from '@clerk/nextjs'
-import { ModalProvider } from '@/components/modal-provider'
+
 import { ToasterProvider } from '@/components/toaster-provider'
 import { ThemeProvider } from '@/components/theme-provider'
 import { Toaster } from '@/components/ui/toaster'
@@ -103,9 +102,8 @@ export default async function SiteLayout({
 
   
 return (
-  // <ClerkProvider>
+ 
 <>
-       <ModalProvider />
        <ToasterProvider />
 
       <ThemeProvider attribute='class' defaultTheme='system' enableSystem>
@@ -120,7 +118,7 @@ return (
       </ThemeProvider> 
 </>     
 
-    /* </ClerkProvider>  */
+    
 );
 
 }

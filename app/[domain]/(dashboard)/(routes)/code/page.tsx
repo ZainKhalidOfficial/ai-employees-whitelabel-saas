@@ -20,7 +20,7 @@ import { Loader } from "@/components/loader";
 import { cn } from "@/lib/utils";
 import { UserAvatar } from "@/components/user-avatar";
 import { BotAvatar } from "@/components/bot-avatar";
-// import { useProModal } from "@/hooks/use-pro-modal";
+
 import { toast } from "react-hot-toast";
 
 interface GPTCHAT {
@@ -29,7 +29,6 @@ interface GPTCHAT {
   }
 
 const CodePage = () => {
-    // const proModal = useProModal();
  
     const router = useRouter();
     const [messages, setMessages] = useState<GPTCHAT[]>([])
@@ -64,7 +63,6 @@ const CodePage = () => {
         catch (error: any) {
             
             if(error?.response?.status === 403) {
-                // proModal.onOpen();
                 toast.error("Not subscribed!");
             } else {
                 toast.error("Something went wrong");

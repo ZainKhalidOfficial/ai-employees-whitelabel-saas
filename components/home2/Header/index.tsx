@@ -75,7 +75,7 @@ const Header = () => {
                   alt="logo"
                   width={140}
                   height={30}
-                  className="w-14"
+                  className="w-10 md:w-14"
                 />
               
               </Link>

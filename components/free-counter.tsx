@@ -5,7 +5,6 @@ import { MAX_FREE_COUNT } from "@/constants";
 import { Progress } from "@/components/ui/progress";
 import { Button } from "@/components/ui/button";
 import { Zap } from "lucide-react";
-// import { useProModal } from "@/hooks/use-pro-modal";
 import { useRouter } from "next/navigation";
 
 
@@ -28,7 +27,6 @@ export const FreeCounter = ({
     isPro = {isPro:false, tokensAllowed: 0, businessProfilesAllowed:0, customEmployeesAllowed:0},
 }: FreeCounterProps) => {
 
-    // const proModal = useProModal();
     const router = useRouter();
     const [mounted, setMounted] = useState(false);
 

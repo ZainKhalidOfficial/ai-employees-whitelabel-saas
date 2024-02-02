@@ -106,19 +106,19 @@ export default function Nav({ children }: { children: ReactNode }) {
         name: "My Sites",
         href: "/sites",
         isActive: segments[0] === "sites",
-        icon: <Globe width={18} />,
+        icon: <Globe className="text-purple-600" width={18} />,
       },
       {
         name: "My Plan",
         href: "/plan",
         isActive: segments[0] === "plan",
-        icon: <Coins width={18} />,
+        icon: <Coins className="text-yellow-600" width={18} />,
       },
       {
         name: "Settings",
         href: "/settings",
         isActive: segments[0] === "settings",
-        icon: <Settings width={18} />,
+        icon: <Settings className="text-blue-500" width={18} />,
       },
     ];
   }, [segments, id, siteId]);
@@ -179,8 +179,8 @@ export default function Nav({ children }: { children: ReactNode }) {
                 key={name}
                 href={href}
                 className={`flex items-center space-x-3 ${
-                  isActive ? "bg-gradient-to-r from-purple-400 via-blue-400 to-gray-900 text-black" : "text-white"
-                } rounded-lg px-2 py-1.5 transition-all duration-150 ease-in-out hover:bg-gradient-to-r hover:from-purple-300 hover:via-blue-300 hover:to-gray-900 hover:text-black active:bg-stone-300`}
+                  isActive ? "bg-slate-600 text-white" : "text-gray-300"
+                } rounded-lg px-2 py-1.5 transition-all duration-150 ease-in-out hover:bg-slate-600 hover:text-white active:bg-slate-600`}
               >
                 {icon}
                 <span className="text-sm font-medium">{name}</span>

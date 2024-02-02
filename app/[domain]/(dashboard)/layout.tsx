@@ -10,6 +10,7 @@ import  jwt  from "jsonwebtoken";
 import { getSiteData } from "@/lib/fetchers";
 import { notFound } from "next/navigation";
 import { NextRequest, NextResponse } from "next/server";
+import { getDomainName } from "@/app/helpers/getDomainName";
 
 interface UserResponse {
     user: string | null;
@@ -22,26 +23,11 @@ const DashboardLayout = async ({
     children: React.ReactNode;
 }) => {
 
+    let domainName = getDomainName();
 
     const apiLimitCount = await getApiLimitCount();
     const isPro = await checkSubscription();
 
-    const cookieStore = cookies()
-    // const domainName = cookieStore.get('domainName')
-
-
-    let domainName: any = "";
-
-    try {
-        const domaintoken = cookies().get('domainParams')?. value || '';
-
-        domainName = jwt.verify(domaintoken , process.env.JWT_SECRET!)
-    
-    } catch (error) { 
-        console.log("Custom Auth failed exception at expertChat page.tsx : ",error)
-
-        return new NextResponse("Unauthorized", { status: 401 });
-    }
 
     const [data] = await Promise.all([  //[data, posts] 
     getSiteData(String(domainName.hostname)), //?.value

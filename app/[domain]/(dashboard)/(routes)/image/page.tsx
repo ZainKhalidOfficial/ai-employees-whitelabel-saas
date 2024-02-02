@@ -20,11 +20,11 @@ import { cn } from "@/lib/utils";
 import { Select, SelectItem, SelectTrigger, SelectValue, SelectContent } from "@/components/ui/select";
 import { Card, CardFooter } from "@/components/ui/card";
 import Image from "next/image";
-// import { useProModal } from "@/hooks/use-pro-modal";
+
 import { toast } from "react-hot-toast";
 
 const ImagePage = () => {
-    // const proModal = useProModal();
+
    
     const router = useRouter();
 
@@ -58,7 +58,7 @@ const ImagePage = () => {
              console.log(error);
             if(error?.response?.status === 403) {
                 toast.error("Not Subscribed!");
-                // proModal.onOpen();
+              
             } else {
                 toast.error("Something went wrong");
             }

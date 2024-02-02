@@ -5,39 +5,38 @@ import { getSession } from "@/lib/auth";
 
 import { cookies } from "next/headers";
 import  jwt  from "jsonwebtoken";
+import { getUserToken } from "@/app/helpers/getUserToken";
 
 const DAY_IN_MS = 86_400_000;
 
 export const checkSubscription = async () => {
 
-    let decodedToken: any = "";
+    // let decodedToken: any = "";
 
-    try {
-        const token = cookies().get('token')?. value || '';
-
-        decodedToken = jwt.verify(token , process.env.JWT_SECRET!)
-        // console.log("data : ", decodedToken.id);
-    
-    } catch (error) { 
-        console.log("Custom Auth failed exception: ",error);
-        return  {isPro:false,
-                 tokensAllowed: 0,
-                 businessProfilesAllowed:0,
-                 customEmployeesAllowed:0};
-        // router.push("/login");
-    }
+    // try {
+       const decodedToken = getUserToken();
+    // } catch (error) { 
+    //     console.log("Custom Auth failed exception: ",error);
+    //     return  {isPro:false,
+    //              tokensAllowed: 0,
+    //              businessProfilesAllowed:0,
+    //              customEmployeesAllowed:0};
+    //     // router.push("/login");
+    // }
 
 
-    if(!decodedToken.id) {
+    if(!decodedToken?.user.id) {
             return {isPro:false,
                     tokensAllowed: 0,
                     businessProfilesAllowed:0,
                     customEmployeesAllowed:0};
          }
 
+        
+
     const userSubscription = await prisma.userSubscription.findUnique({
         where: {
-            userId: decodedToken?.id
+            userId: decodedToken?.user.id
         },
         select: {
             stripeSubscriptionId: true,
@@ -50,6 +49,7 @@ export const checkSubscription = async () => {
             
         },
     });
+
 
     if(!userSubscription) {
         return {isPro:false,

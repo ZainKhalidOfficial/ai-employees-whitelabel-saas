@@ -22,6 +22,8 @@ export default async function WhitelabelPlanPage() {
     }
 });
 
+
+
   return (
     <div className="flex max-w-screen-xl flex-col space-y-12 p-2">
       <div className="flex flex-col space-y-6">
@@ -55,7 +57,8 @@ export default async function WhitelabelPlanPage() {
           handleSubmit={editUser}
         /> */}
 
-        <WhitelabelSubscriptionPlan isPro={{isPro: false, tokens: 0}} disabled={false} planData={pathData}/>
+       <WhitelabelSubscriptionPlan isPro={{isPro: false, tokens: 0}} disabled={false} planData={pathData}/>
+        
 
       </div>
     </div>

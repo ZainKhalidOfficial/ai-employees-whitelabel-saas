@@ -1,7 +1,7 @@
 import { Avatar, AvatarImage } from "@/components/ui/avatar"
 
 interface ExpertBotAvatarProps {
-    src: string
+    src: string | null
 };
 
 export const ExpertBotAvatar = ({
@@ -9,7 +9,9 @@ export const ExpertBotAvatar = ({
 }: ExpertBotAvatarProps) => {
     return (
         <Avatar className="w-12 h-12">
+            {src?
             <AvatarImage src={src} />
+            : <AvatarImage src={""} />}
         </Avatar>
     )
 }

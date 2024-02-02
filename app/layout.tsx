@@ -5,7 +5,7 @@ import { ClerkProvider } from '@clerk/nextjs'
 import { Providers } from "./providers";
 import { Metadata } from "next";
 import { cn } from "@/lib/utils";
-import { ModalProvider } from '@/components/modal-provider'
+
 import { ToasterProvider } from '@/components/toaster-provider'
 import { ThemeProvider } from '@/components/theme-provider'
 import { Toaster } from '@/components/ui/toaster'
@@ -44,7 +44,6 @@ export default function RootLayout({
     //  <ClerkProvider>
     <html lang="en" suppressHydrationWarning>
       <body className={cn(cal.variable, inter.variable)}>
-      {/* <ModalProvider /> */}
         {/* <ToasterProvider /> */}
 
         {/* <ThemeProvider attribute='class' defaultTheme='system' enableSystem> */}

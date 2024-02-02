@@ -23,7 +23,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-// import { useProModal } from "@/hooks/use-pro-modal";
 
 import  ChatCompletionRequestMessage  from "openai";
 import { Empty } from "@/components/empty";
@@ -64,8 +63,7 @@ export const ExpertChatClient = ({
     businessProfiles,
     user,
 }: ExpertChatClientProps) => {
-    
-    // const proModal = useProModal();
+
 
     const { theme } = useTheme();
 
@@ -111,7 +109,7 @@ export const ExpertChatClient = ({
             console.log("Zain Error : ",error);
             if(error?.response?.status === 403) {
                 toast.error("Not Subscribed!");
-                // proModal.onOpen();
+        
             } else {
                 toast.error("Something went wrong");
             }
@@ -238,7 +236,7 @@ export const ExpertChatClient = ({
                             : "bg-muted"
                             )}
                             >
-                                {message.role === "user" ? <ExpertBotAvatar src={expert.src} />:<ExpertBotAvatar src={expert.src} />} {/*<UserAvatar user={user} /> */}
+                                {message.role === "user" ? <ExpertBotAvatar src={user.image} />:<ExpertBotAvatar src={expert.src} />} {/*<UserAvatar user={user} /> */}
                                 <p className="text-sm">
                                 {message.content}
                                 </p>

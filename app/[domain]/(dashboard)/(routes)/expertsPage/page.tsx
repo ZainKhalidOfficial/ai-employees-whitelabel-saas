@@ -11,7 +11,6 @@ import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
-// import { useProModal } from "@/hooks/use-pro-modal";
 
 import  ChatCompletionRequestMessage  from "openai";
 import { Empty } from "@/components/empty";
@@ -31,6 +30,8 @@ import { NextRequest } from "next/server";
 
 import { cookies } from 'next/headers'
 import  jwt  from "jsonwebtoken";
+import { getUserToken } from "@/app/helpers/getUserToken";
+import { getDomainName } from "@/app/helpers/getDomainName";
 
 interface GPTCHAT {
     role: "user" | "system"; 
@@ -48,20 +49,8 @@ const ExpertsPage =async ({
     searchParams
 }: ExpertsPageProps) => {
 
-    // const router = useRouter();
-
-    let decodedToken: any = "";
-
-    try {
-        const token = cookies().get('token')?. value || '';
-
-        decodedToken = jwt.verify(token , process.env.JWT_SECRET!)
-        // console.log("data : ", decodedToken.id);
-    
-    } catch (error) {
-        console.log("Custom Auth failed exception zain: ",error)
-        // router.push("/login");
-    }
+    const userToken = getUserToken();
+    const domainName = getDomainName();
     
 
     const data = await prisma.companion.findMany({

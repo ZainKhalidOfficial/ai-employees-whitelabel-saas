@@ -3,11 +3,14 @@
 import { Montserrat } from "next/font/google";
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 import { cn } from "@/lib/utils";
 import { LayoutDashboard, Wrench, Building2, Users2, Plus, Settings } from "lucide-react";
 import { FreeCounter } from "@/components/free-counter";
+import { Button } from "./ui/button";
+import axios, { AxiosError } from "axios";
+import { useToast } from "./ui/use-toast";
 
 const montserrat = Montserrat({weight:"600" , subsets:["latin"]})
 
@@ -76,6 +79,27 @@ const Sidebar = ({
 
     const pathname = usePathname();
 
+    const router = useRouter();
+    const { toast } = useToast();
+  
+    let deleteCookie = async () =>
+    {
+      try {
+  
+      const {data} =  await axios.get("/api/authusers/logout");
+  
+      router.refresh();
+    }
+    catch (e) {
+        toast({
+            variant : "destructive",
+            description : "Logout Failed",
+        });
+  
+        const error = e as AxiosError;
+    }
+    }
+
     return ( 
         <div className="space-y-4 py-4 flex flex-col h-full bg-[#111827] text-white">
             
@@ -122,6 +146,10 @@ const Sidebar = ({
                 isPro={isPro}    
                 apiLimitCount={apiLimitCount}
             />
+
+            <div className="flex w-full items-center justify-center">
+            <Button className="w-1/4 bg-slate-500" onClick={deleteCookie} >Logout</Button>
+            </div>
         </div>
      );
 }

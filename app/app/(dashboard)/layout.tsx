@@ -10,7 +10,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
           <Profile />
         </Suspense>
       </Nav>
-      <div className="min-h-screen bg-gradient-to-r from-purple-200 via-blue-300 to-indigo-200 pt-5 sm:pt-0 sm:pl-60">{children}</div>
+      <div className="min-h-screen bg-gradient-to-r from-purple-600 via-indigo-400 to-blue-500 pt-5 sm:pt-0 sm:pl-60">{children}</div> {/*bg-gradient-to-r from-purple-200 via-blue-300 to-indigo-200*/}
     </div>
   );
 }

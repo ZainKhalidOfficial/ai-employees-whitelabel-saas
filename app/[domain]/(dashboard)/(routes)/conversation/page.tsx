@@ -12,7 +12,6 @@ import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
-// import { useProModal } from "@/hooks/use-pro-modal";
 
 import  ChatCompletionRequestMessage  from "openai";
 import { Empty } from "@/components/empty";
@@ -30,7 +29,6 @@ interface GPTCHAT {
   }
 
 const ConversationPage = () => {
-    // const proModal = useProModal();
 
     const router = useRouter();
     const [messages, setMessages] = useState<GPTCHAT[]>([])
@@ -68,7 +66,7 @@ const ConversationPage = () => {
             console.log(error);
             if(error?.response?.status === 403) {
                 toast.error("Not Subscribed!");
-                // proModal.onOpen();
+                
             } else {
                 toast.error("Something went wrong");
             }
