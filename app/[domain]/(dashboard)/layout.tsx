@@ -3,13 +3,10 @@ import Sidebar from "@/components/sidebar";
 import { getApiLimitCount } from "@/lib/api-limit";
 import { checkSubscription } from "@/lib/subscription";
 import axios, { AxiosError } from "axios";
-import { useRouter } from "next/navigation";
-import {useState, useEffect } from "react";
-import { cookies } from 'next/headers'
-import  jwt  from "jsonwebtoken";
+
+import {Suspense } from "react";
 import { getSiteData } from "@/lib/fetchers";
 import { notFound } from "next/navigation";
-import { NextRequest, NextResponse } from "next/server";
 import { getDomainName } from "@/app/helpers/getDomainName";
 
 interface UserResponse {
@@ -33,14 +30,42 @@ const DashboardLayout = async ({
     getSiteData(String(domainName.hostname)), //?.value
   ]);
 
-  if (!data) {
+  let deleteCookie = async () =>
+  {
+    try {
+
+    const {data} =  await axios.get("/api/authusers/logout");
+
+  }
+  catch (e) {
+
+      const error = e as AxiosError;
+
+      console.log("Exception at [domain]/layout : ",error);
+  }
+  }
+
+    if (!data) {
+
+    deleteCookie();
+
     notFound();
   }
 
+  
     
 
     return ( 
+
+      
         <div className="h-full relative">
+          
+          <Suspense fallback={
+              <div className="flex justify-center items-center gap-2 h-screen">
+           <div className="rounded-md h-12 w-12 md: border-4 border-t-4 border-white animate-spin absolute"></div>
+              </div>
+          }>
+
             <div className="hidden h-full md:flex md:w-72 md:flex-col md:fixed md:inset-y-0 bg-gray-900">
                 
                     <Sidebar isPro={isPro} apiLimitCount={apiLimitCount} logo={data.logo} siteName={data.name} />
@@ -50,7 +75,9 @@ const DashboardLayout = async ({
                 <Navbar logo={data.logo} siteName={data.name}  />
                 {children}
             </main>
+        </Suspense>
         </div>
+
      );
 }
  

@@ -1,25 +1,24 @@
 "use client";
 
 import { Card } from "@/components/ui/card";
-import { ArrowRight, MessageSquare, Music, ImageIcon, PlusCircleIcon, Code, Users2 } from "lucide-react";
+import { ArrowRight, MessageSquare, Music, ImageIcon, PlusCircleIcon, Code, Users2, Building } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useRouter } from "next/navigation";
-import { useState, useEffect } from "react";
-import axios, { AxiosError } from "axios";
+
 const tools = [
   {
     label:'Experts',
     icon: Users2,
     color: 'text-blue-500',
     bgColor: 'bg-blue-500/10',
-    href: '/expertsPage'
+    href: '/expertChat'
   },
   {
     label:'Create Custom Experts',
     icon: PlusCircleIcon,
     color: 'text-blue-500',
     bgColor: 'bg-blue-500/10',
-    href: '/customExpertPage'
+    href: '/customExpert'
   },
   {
     label:'General Conversation',
@@ -28,14 +27,6 @@ const tools = [
     bgColor: 'bg-violet-500/10',
     href: '/conversation'
   },
-  // {
-  //   label:'Music Generation',
-  //   icon: Music,
-  //   color: 'text-emerald-500',
-  //   bgColor: 'bg-emerald-500/10',
-  //   href: '/music'
-  // }
-  // ,
   {
     label:'Image Generation',
     icon: ImageIcon,
@@ -44,14 +35,14 @@ const tools = [
     href: '/image'
   }
   ,
-  // {
-  //   label:'Video Generation',
-  //   icon: VideoIcon,
-  //   color: 'text-green-700',
-  //   bgColor: 'bg-green-700/10',
-  //   href: '/video'
-  // }
-  // ,
+  {
+    label:'Business Profiles',
+    icon: Building,
+    color: 'text-green-700',
+    bgColor: 'bg-green-700/10',
+    href: '/businessProfiles'
+  }
+  ,
   {
     label:'Code Generation',
     icon: Code,
@@ -64,26 +55,6 @@ const tools = [
  const DashboardPage = () => {
 
    const { push } = useRouter();
-
-  //   const [data, setData] = useState("nothing");
-  //   const [isSuccess, setIsSuccess] = useState<boolean>(false);
-
-  //   useEffect(() => {
-  //   (async () => {
-
-  //       const res = await axios.get('/api/authusers/me');
-  //       console.log(res.data);
-  //       setData(res.data.user);
-  
-  //     // if the error did not happen, if everything is alright
-  //     setIsSuccess(true);
-  //   })();
-  // }, [push]);
-
-  // if (!isSuccess) {
-  //   return <p>Loading...</p>;
-  // }
-  
   
   return (
     <div>

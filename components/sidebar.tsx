@@ -24,7 +24,7 @@ const routes = [
    {
     label: 'Experts',
     icon: Users2,
-    href: '/expertsPage',
+    href: '/expertChat',
     color: 'text-violet-500',
    },
    {
@@ -36,13 +36,13 @@ const routes = [
     {
     label: 'Business Profiles',
     icon: Building2,
-    href: '/businessProfilesPage',
+    href: '/businessProfiles',
     color: 'text-emerald-700',
     },
    {
     label: 'Custom Experts',
     icon: Plus,
-    href: '/customExpertPage',
+    href: '/customExpert',
     color: 'text-violet-500',
     },
   {

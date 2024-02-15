@@ -13,15 +13,13 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
 
-import  ChatCompletionRequestMessage  from "openai";
 import { Empty } from "@/components/empty";
 import { Loader } from "@/components/loader";
 import { cn } from "@/lib/utils";
 import { UserAvatar } from "@/components/user-avatar";
 import { BotAvatar } from "@/components/bot-avatar";
 import { toast } from "react-hot-toast";
-import { error } from "console";
-import { getDataFromToken } from "@/app/helpers/getDataFromToken";
+
 
 
 interface GPTCHAT {

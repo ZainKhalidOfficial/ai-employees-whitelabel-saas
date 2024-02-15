@@ -15,7 +15,6 @@ import { useState } from "react";
 
 import { Empty } from "@/components/empty";
 import { Loader } from "@/components/loader";
-import { cn } from "@/lib/utils";
 
 import { Select, SelectItem, SelectTrigger, SelectValue, SelectContent } from "@/components/ui/select";
 import { Card, CardFooter } from "@/components/ui/card";

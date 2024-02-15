@@ -5,7 +5,7 @@ import { checkSubscription } from "@/lib/subscription";
 import { SubscriptionButton } from "@/components/subscription-button";
 import { SubscriptionPlan } from "@/components/subscription-plan";
 import { getSiteData } from "@/lib/fetchers";
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 
 import { cookies } from "next/headers";
 import  jwt  from "jsonwebtoken";

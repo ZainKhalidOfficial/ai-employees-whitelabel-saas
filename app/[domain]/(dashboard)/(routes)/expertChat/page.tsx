@@ -1,37 +1,15 @@
 
-import axios from "axios";
-import * as z from "zod";
-import { useRouter } from "next/navigation";
 import { Heading } from "@/components/heading";
-import { MessageSquare, Users } from "lucide-react";
-import { useForm } from "react-hook-form";
-import { formSchema } from "./constants";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { useEffect, useState } from "react";
+import { Users } from "lucide-react";
 
-import  ChatCompletionRequestMessage  from "openai";
-import { Empty } from "@/components/empty";
-import { Loader } from "@/components/loader";
-import { cn } from "@/lib/utils";
-import { UserAvatar } from "@/components/user-avatar";
-import { BotAvatar } from "@/components/bot-avatar";
-import { toast } from "react-hot-toast";
-import { error } from "console";
 import { SearchInput } from "@/components/search-input";
 
 import { Categories } from "@/components/categories";
 import prisma from "@/lib/prisma";
 import { Experts } from "@/components/experts";
-import { getDataFromToken } from "@/app/helpers/getDataFromToken";
-import { NextRequest } from "next/server";
 
-import { cookies } from 'next/headers'
-import  jwt  from "jsonwebtoken";
 import { getUserToken } from "@/app/helpers/getUserToken";
-import { getDomainName } from "@/app/helpers/getDomainName";
+
 
 interface GPTCHAT {
     role: "user" | "system"; 
@@ -50,8 +28,6 @@ const ExpertsPage =async ({
 }: ExpertsPageProps) => {
 
     const userToken = getUserToken();
-    const domainName = getDomainName();
-    
 
     const data = await prisma.companion.findMany({
         where:  {

@@ -14,7 +14,7 @@ export const getUserToken = () => {
         
     } catch (error: any) {
 
-        // throw new Error(error.message);
+        console.log("Exception at getUserToken() : ",error.message);
         return null;
     }
 }

@@ -1,11 +1,5 @@
 import prisma from "@/lib/prisma";
 import { BusinessProfilesForm } from "./components/business-profiles-form";
-// import { auth, redirectToSignIn } from "@clerk/nextjs";
-import { Button } from "@/components/ui/button";
-import { Wand2 } from "lucide-react";
-import { toast } from "@/components/ui/use-toast";
-import { getSession } from "@/lib/auth";
-import { redirect } from "next/navigation";
 
 import { cookies } from 'next/headers'
 import  jwt  from "jsonwebtoken";

@@ -19,7 +19,6 @@ import { cn } from "@/lib/utils";
 import { toast } from "react-hot-toast";
 
 const VideoPage = () => {
-    // const proModal = useProModal();
  
     const router = useRouter();
     const [video, setVideo] = useState<string>()

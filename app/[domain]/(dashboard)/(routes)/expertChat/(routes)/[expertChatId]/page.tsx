@@ -1,10 +1,6 @@
 import prisma from "@/lib/prisma";
-import { auth, redirectToSignIn } from "@clerk/nextjs";
 import { ExpertChatClient } from "./components/client";
-
 import { redirect } from "next/navigation";
-import { cookies } from "next/headers";
-import  jwt  from "jsonwebtoken";
 import { getUserToken } from "@/app/helpers/getUserToken";
 
 interface ExpertChatIdProps {

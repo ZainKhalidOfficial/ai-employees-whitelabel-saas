@@ -1,8 +1,6 @@
 import prisma from "@/lib/prisma";
 import { ExpertForm } from "./components/expert-form";
-import { auth, redirectToSignIn } from "@clerk/nextjs";
-import { getSession } from "@/lib/auth";
-import { redirect } from "next/navigation";
+
 
 import { cookies } from "next/headers";
 import  jwt  from "jsonwebtoken";

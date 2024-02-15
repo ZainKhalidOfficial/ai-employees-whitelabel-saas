@@ -1,14 +1,11 @@
-import Image from "next/image";
-import Link from "next/link";
 import { ReactNode } from "react";
-import CTA from "@/components/cta";
-import ReportAbuse from "@/components/report-abuse";
+
 import { notFound, redirect } from "next/navigation";
 import { getSiteData } from "@/lib/fetchers";
-import { fontMapper } from "@/styles/fonts";
+
 import { Metadata } from "next";
 
-import './globals.css'
+import '@/app/globals.css'
 // import type { Metadata } from 'next'
 // import { Inter } from 'next/font/google'
 

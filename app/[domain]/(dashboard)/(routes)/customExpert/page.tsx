@@ -1,16 +1,7 @@
 
-import { Card } from "@/components/ui/card";
-import { ArrowRight, MessageSquare, Music, ImageIcon, VideoIcon, Code, Users2, Wand2, Plus, Import, Building } from "lucide-react";
-import { cn } from "@/lib/utils";
-
-import prisma from "@/lib/prisma";
 
 import { CreateCustomEmployeeButton } from "@/components/create-customEmployee-Button";
-import Link from "next/link";
-import { auth, redirectToSignIn, useAuth } from "@clerk/nextjs";
-import { NextResponse } from "next/server";
 import { CustomExpertsListPage } from "@/components/customExperts";
-import { Button } from "@/components/ui/button";
 
 
 const customExpertsPage = async () => {

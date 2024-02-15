@@ -1,12 +1,22 @@
 
-const ExpertChatLayout = ({
-    children
-}: { children: React.ReactNode}) => {
-    return ( 
-        <div className="mx-auto  h-full w-full">
-            {children}
-        </div>
-     );
+import { ReactNode, Suspense } from "react";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Experts",
+};
+
+export default function ExpertChatLayout({ children }: { children: ReactNode }) {
+  return (
+    <Suspense fallback={
+      <div className="flex justify-center items-center gap-2 h-screen">
+        <div className="rounded-md h-12 w-12 md: border-4 border-t-4 border-white animate-spin absolute"></div>
+      </div>
+    }>
+      {children}
+    </Suspense>
+  );
 }
- 
-export default ExpertChatLayout;
+
+
+

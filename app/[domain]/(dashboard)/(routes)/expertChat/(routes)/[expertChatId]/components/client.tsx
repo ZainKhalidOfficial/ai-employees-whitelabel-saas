@@ -3,20 +3,11 @@
 import axios from "axios";
 import * as z from "zod";
 
-import { useCompletion} from "ai/react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { FormEvent, useState } from "react";
+import { useState } from "react";
 import { ExpertChatHeader } from "@/components/expert-chat-header";
 import { BusinessProfile, Companion, Message, User } from "@prisma/client"
-import exp from "constants";
-import { ExpertChatForm } from "@/components/expert-chat-form";
-import { ExpertChatMessages } from "@/components/expert-chat-messages";
-import { ExpertChatMessageProps } from "@/components/expert-chat-message";
 
-
-
-import { Heading } from "@/components/heading";
-import { MessageSquare } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { formSchema } from "./constants";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -24,9 +15,8 @@ import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
-import  ChatCompletionRequestMessage  from "openai";
 import { Empty } from "@/components/empty";
-import { Loader } from "@/components/loader";
+
 import { cn } from "@/lib/utils";
 import { UserAvatar } from "@/components/user-avatar";
 import { BotAvatar } from "@/components/bot-avatar";
