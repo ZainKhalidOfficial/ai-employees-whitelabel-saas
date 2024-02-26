@@ -1,5 +1,4 @@
 
-import { auth, useAuth, redirectToSignIn } from "@clerk/nextjs";
 import { BusinessProfile} from "@prisma/client";
 import Image from "next/image";
 import { Card, CardFooter, CardHeader } from "./ui/card";
