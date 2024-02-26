@@ -5,7 +5,7 @@ import prisma from "@/lib/prisma";
 // import { NextApiRequest } from "next";
 import { getUserToken } from "@/app/helpers/getUserToken";
 
-// const VERCEL_DEPLOYMENT = !!process.env.VERCEL_URL;
+const VERCEL_DEPLOYMENT = !!process.env.VERCEL_URL;
 
 
 // //Original Code 
