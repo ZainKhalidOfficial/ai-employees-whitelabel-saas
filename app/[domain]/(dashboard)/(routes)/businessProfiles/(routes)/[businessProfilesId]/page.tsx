@@ -14,12 +14,6 @@ const businessProfilesId = async ({
     params
 }: businessProfilesIdProps) => {
 
-    // const { userId } = auth();
-    // //TODO: Check Subscription
-
-    // if(!userId) {
-    //     return redirectToSignIn();
-    // }
 
     let decodedToken: any = "";
 

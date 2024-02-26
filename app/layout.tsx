@@ -47,10 +47,10 @@ export default function RootLayout({
         {/* <ToasterProvider /> */}
 
         {/* <ThemeProvider attribute='class' defaultTheme='system' enableSystem> */}
-        <Providers>
+        {/* <Providers> */}
           {children}
           {/* <Analytics /> */}
-        </Providers>
+        {/* </Providers> */}
         {/* <Toaster /> */}
         {/* </ThemeProvider> */}
       </body>

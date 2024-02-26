@@ -1,7 +1,5 @@
 import Navbar from "@/components/navbar";
 import Sidebar from "@/components/sidebar";
-import { getApiLimitCount } from "@/lib/api-limit";
-import { checkSubscription } from "@/lib/subscription";
 import axios, { AxiosError } from "axios";
 
 import {Suspense } from "react";
@@ -22,13 +20,10 @@ const DashboardLayout = async ({
 
     let domainName = getDomainName();
 
-    const apiLimitCount = await getApiLimitCount();
-    const isPro = await checkSubscription();
-
-
     const [data] = await Promise.all([  //[data, posts] 
     getSiteData(String(domainName.hostname)), //?.value
   ]);
+
 
   let deleteCookie = async () =>
   {
@@ -45,15 +40,12 @@ const DashboardLayout = async ({
   }
   }
 
-    if (!data) {
+    if (!data || !domainName) {
 
     deleteCookie();
 
     notFound();
   }
-
-  
-    
 
     return ( 
 
@@ -68,12 +60,21 @@ const DashboardLayout = async ({
 
             <div className="hidden h-full md:flex md:w-72 md:flex-col md:fixed md:inset-y-0 bg-gray-900">
                 
-                    <Sidebar isPro={isPro} apiLimitCount={apiLimitCount} logo={data.logo} siteName={data.name} />
+                    <Sidebar logo={data.logo} siteName={data.name} />
                 
             </div>
             <main className="md:pl-72 mx-auto h-full w-full">
                 <Navbar logo={data.logo} siteName={data.name}  />
+
+                <Suspense fallback={
+                  <div className="flex justify-center items-center gap-2 h-screen">
+                  <div className="rounded-md h-12 w-12 md: border-4 border-t-4 border-white animate-spin absolute"></div>
+                 </div>
+                   }> 
+                
                 {children}
+
+                </Suspense>
             </main>
         </Suspense>
         </div>

@@ -2,21 +2,52 @@
  * @type {import('next').NextConfig}
  */
 module.exports = {
-  experimental: {
-    serverActions: true,
-  },
+  // experimental: {
+  //   serverActions: true,
+  // },
   images: {
-    domains: [
-      "public.blob.vercel-storage.com",
-      "res.cloudinary.com",
-      "abs.twimg.com",
-      "pbs.twimg.com",
-      "avatar.vercel.sh",
-      "avatars.githubusercontent.com",
-      "www.google.com",
-      "flag.vercel.app",
-      "illustrations.popsy.co",
-      "res.cloudinary.com"
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: "public.blob.vercel-storage.com",
+        pathname: '/**'
+      },
+      {
+        hostname: "res.cloudinary.com",
+        pathname: '/**'
+      },
+      {
+        hostname: "abs.twimg.com",
+        pathname: '/**'
+      },
+      {
+        hostname: "pbs.twimg.com",
+        pathname: '/**'
+      },
+      {
+        hostname: "avatar.vercel.sh",
+        pathname: '/**'
+      },
+      {
+        hostname: "avatars.githubusercontent.com",
+        pathname: '/**'
+      },
+      {
+        hostname: "www.google.com",
+        pathname: '/**'
+      },
+      {
+        hostname: "flag.vercel.app",
+        pathname: '/**'
+      },      
+      {
+        hostname: "illustrations.popsy.co",
+        pathname: '/**'
+      },   
+      {
+        hostname: "res.cloudinary.com",
+        pathname: '/**'
+      },   
     ],
   },
   reactStrictMode: false,

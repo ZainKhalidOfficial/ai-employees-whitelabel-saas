@@ -14,6 +14,7 @@ export default function ExpertChatLayout({ children }: { children: ReactNode }) 
       </div>
     }>
       {children}
+
     </Suspense>
   );
 }

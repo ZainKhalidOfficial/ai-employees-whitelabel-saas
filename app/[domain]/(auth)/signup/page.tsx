@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 // import LoginButton from "./login-button";
 import { Suspense } from "react";
 

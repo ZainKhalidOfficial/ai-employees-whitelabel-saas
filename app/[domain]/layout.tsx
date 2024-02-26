@@ -2,19 +2,16 @@ import { ReactNode } from "react";
 
 import { notFound, redirect } from "next/navigation";
 import { getSiteData } from "@/lib/fetchers";
-
 import { Metadata } from "next";
 
 import '@/app/globals.css'
-// import type { Metadata } from 'next'
-// import { Inter } from 'next/font/google'
+
 
 import { ToasterProvider } from '@/components/toaster-provider'
 import { ThemeProvider } from '@/components/theme-provider'
 import { Toaster } from '@/components/ui/toaster'
 
 import { Inter } from 'next/font/google'
-// const inter = Inter({ subsets: ['latin'] })
 
 
 

@@ -1,11 +1,8 @@
-import Link from "next/link";
+
 import prisma from "@/lib/prisma";
 import { notFound } from "next/navigation";
-import BlurImage from "@/components/blur-image";
-import { placeholderBlurhash, toDateString } from "@/lib/utils";
-import BlogCard from "@/components/blog-card";
 import { getPostsForSite, getSiteData } from "@/lib/fetchers";
-import Image from "next/image";
+
 
 import { LandingNavbar } from "@/components/landing-navbar";
 import { LandingHero } from "@/components/landing-hero";
@@ -13,7 +10,6 @@ import { LandingContent } from "@/components/landing-content";
 import { SubscriptionPlan } from "@/components/subscription-plan";
 import { FooterContent } from "@/components/landing-footer";
 import FAQSection from "@/components/landing-faq";
-import { cookies } from "next/headers";
 
 export async function generateStaticParams() {
   const allSites = await prisma.site.findMany({

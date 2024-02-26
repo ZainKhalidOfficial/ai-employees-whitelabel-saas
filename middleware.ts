@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getToken } from "next-auth/jwt";
 import { cookies } from 'next/headers';
 import { getDataFromToken } from "./app/helpers/getDataFromToken";
 import jwt from "jsonwebtoken";
