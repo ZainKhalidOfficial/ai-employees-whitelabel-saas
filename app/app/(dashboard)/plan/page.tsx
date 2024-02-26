@@ -1,7 +1,6 @@
 import { ReactNode } from "react";
 import Form from "@/components/form";
 import { redirect } from "next/navigation";
-import { editUser } from "@/lib/actions";
 import { WhitelabelSubscriptionPlan } from "@/components/whitelabel-subscription-plan";
 import prisma from "@/lib/prisma";
 import { getUserToken } from "@/app/helpers/getUserToken";

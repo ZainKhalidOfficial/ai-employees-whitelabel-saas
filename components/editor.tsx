@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useTransition } from "react";
 import { Post } from "@prisma/client";
-import { updatePost } from "@/lib/actions"; //updatePostMetadata
+// import { updatePost } from "@/lib/actions"; //updatePostMetadata
 import { Editor as NovelEditor } from "novel";
 import TextareaAutosize from "react-textarea-autosize";
 import { cn } from "@/lib/utils";
@@ -28,7 +28,7 @@ export default function Editor({ post }: { post: PostWithSite }) {
       if (e.metaKey && e.key === "s") {
         e.preventDefault();
         startTransitionSaving(async () => {
-          await updatePost(data);
+          // await updatePost(data);
         });
       }
     };
@@ -123,7 +123,7 @@ export default function Editor({ post }: { post: PostWithSite }) {
             return;
           }
           startTransitionSaving(async () => {
-            await updatePost(data);
+            // await updatePost(data);
           });
         }}
       />
