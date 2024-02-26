@@ -55,7 +55,7 @@ const MobileSidebar = ({
             </SheetTrigger>
 
             <SheetContent side="left" className="p-0">
-                <Sidebar isPro={isPro} apiLimitCount={apiLimitCount}  logo={logo} siteName={siteName} />
+                <Sidebar  logo={logo} siteName={siteName} />
             </SheetContent>
 
         </Sheet>

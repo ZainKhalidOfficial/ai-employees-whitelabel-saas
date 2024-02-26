@@ -23,7 +23,7 @@ import { Zap } from "lucide-react";
 // const montserrat = Montserrat({weight:"600" , subsets:["latin"]})
 
 interface SidebarProps {
-
+    
     logo: String | null;
     siteName: String | null;
 };
