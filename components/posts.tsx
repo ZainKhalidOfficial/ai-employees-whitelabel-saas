@@ -1,4 +1,3 @@
-import { getSession } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import prisma from "@/lib/prisma";
 import PostCard from "./post-card";
@@ -12,7 +11,7 @@ export default async function Posts({
   siteId?: string;
   limit?: number;
 }) {
-  // const session = await getSession();
+
   const session = await getUserToken();
   
   if (!session?.user) {

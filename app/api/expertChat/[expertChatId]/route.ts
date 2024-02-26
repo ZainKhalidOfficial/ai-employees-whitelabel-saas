@@ -15,8 +15,6 @@ import { use } from "react";
 import OpenAI from "openai";
 import { increaseApiLimit, checkApiLimit } from "@/lib/api-limit";
 import { checkSubscription } from "@/lib/subscription";
-import { getSession } from "@/lib/auth";
-import { redirect } from "next/navigation";
 import { cookies } from "next/headers";
 import  jwt  from "jsonwebtoken";
 

@@ -1,4 +1,4 @@
-import { getSession } from "@/lib/auth";
+
 import { redirect } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
@@ -7,7 +7,6 @@ import { getUserToken } from "@/app/helpers/getUserToken";
 
 export default async function Profile() {
 
-  // const session = await getSession();
      const session = await getUserToken();
 
   if (!session?.user) {

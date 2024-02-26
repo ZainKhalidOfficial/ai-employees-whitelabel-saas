@@ -1,11 +1,5 @@
-// import { auth } from "@clerk/nextjs";
-
 import prisma from "@/lib/prisma";
 import { MAX_FREE_COUNT } from "@/constants";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/lib/auth";
-import { redirect } from "next/navigation";
-import { getSession } from "@/lib/auth";
 import { cookies } from "next/headers";
 import  jwt  from "jsonwebtoken";
 import { getUserToken } from "@/app/helpers/getUserToken";

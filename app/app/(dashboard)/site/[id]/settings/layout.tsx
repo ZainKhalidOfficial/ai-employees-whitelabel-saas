@@ -1,5 +1,4 @@
 import { ReactNode } from "react";
-import { getSession } from "@/lib/auth";
 import prisma from "@/lib/prisma";
 import { notFound, redirect } from "next/navigation";
 import SiteSettingsNav from "./nav";
@@ -12,7 +11,7 @@ export default async function SiteAnalyticsLayout({
   params: { id: string };
   children: ReactNode;
 }) {
-  // const session = await getSession();
+
      const session = await getUserToken();
      
   if (!session) {

@@ -1,4 +1,5 @@
-import { getSession } from "@/lib/auth";
+// import { getSession } from "@/lib/auth";
+
 import prisma from "@/lib/prisma";
 import { notFound, redirect } from "next/navigation";
 import Form from "@/components/form";
@@ -10,25 +11,26 @@ export default async function PostSettings({
 }: {
   params: { id: string };
 }) {
-  const session = await getSession();
-  if (!session) {
-    redirect("/login");
-  }
-  const data = await prisma.post.findUnique({
-    where: {
-      id: decodeURIComponent(params.id),
-    },
-  });
-  if (!data || data.userId !== session.user.id) {
-    notFound();
-  }
+
+  // const session = await getSession();
+  // if (!session) {
+  //   redirect("/login");
+  // }
+  // const data = await prisma.post.findUnique({
+  //   where: {
+  //     id: decodeURIComponent(params.id),
+  //   },
+  // });
+  // if (!data || data.userId !== session.user.id) {
+  //   notFound();
+  // }
   return (
     <div className="flex max-w-screen-xl flex-col space-y-12 p-6">
       <div className="flex flex-col space-y-6">
         <h1 className="font-cal text-3xl font-bold dark:text-white">
-          Post Settings
+          PostSettings Page
         </h1>
-        <Form
+        {/* <Form
           title="Post Slug"
           description="The slug is the URL-friendly version of the name. It is usually all lowercase and contains only letters, numbers, and hyphens."
           helpText="Please use a slug that is unique to this post."
@@ -51,9 +53,9 @@ export default async function PostSettings({
             defaultValue: data?.image!,
           }}
           handleSubmit={updatePostMetadata}
-        />
+        /> */}
 
-        <DeletePostForm postName={data?.title!} />
+        {/* <DeletePostForm postName={data?.title!} /> */}
       </div>
     </div>
   );

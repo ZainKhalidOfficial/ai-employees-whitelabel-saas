@@ -1,8 +1,5 @@
 import prisma from "@/lib/prisma";
-import { currentUser } from "@clerk/nextjs";
 import { NextResponse } from "next/server";
-import { getSession } from "@/lib/auth";
-import { redirect } from "next/navigation";
 
 import { cookies } from "next/headers";
 import  jwt  from "jsonwebtoken";

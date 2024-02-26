@@ -1,4 +1,3 @@
-import { getSession } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import prisma from "@/lib/prisma";
 import SiteCard from "./site-card";
@@ -6,7 +5,6 @@ import Image from "next/image";
 import { getUserToken } from "@/app/helpers/getUserToken";
 
 export default async function Sites({ limit }: { limit?: number }) {
-  // const session = await getSession();
      const session = await getUserToken();
      
   if (!session) {

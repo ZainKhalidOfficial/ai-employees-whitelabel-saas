@@ -1,10 +1,4 @@
-// import { auth } from "@clerk/nextjs";
-
 import prisma from "@/lib/prisma";
-import { getSession } from "@/lib/auth";
-
-import { cookies } from "next/headers";
-import  jwt  from "jsonwebtoken";
 import { getUserToken } from "@/app/helpers/getUserToken";
 
 const DAY_IN_MS = 86_400_000;

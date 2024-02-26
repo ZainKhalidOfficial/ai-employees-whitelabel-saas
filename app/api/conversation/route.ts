@@ -1,4 +1,3 @@
-import { auth } from "@clerk/nextjs";
 import {NextRequest, NextResponse } from "next/server";
 // import { Configuration, OpenAIApi } from "openai";
 import OpenAI from "openai";
@@ -6,7 +5,6 @@ import OpenAI from "openai";
 import { increaseApiLimit, checkApiLimit } from "@/lib/api-limit";
 
 import { checkSubscription } from "@/lib/subscription";
-import { getSession } from "@/lib/auth";
 import { getDataFromToken } from "@/app/helpers/getDataFromToken";
 
 

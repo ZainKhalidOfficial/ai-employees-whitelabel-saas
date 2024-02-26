@@ -9,13 +9,8 @@ import { Building, MessagesSquare } from "lucide-react";
 
 import { ArrowRight, MessageSquare, Music, ImageIcon, VideoIcon, Code, Users2, Wand2, Plus, Import } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { useRouter } from "next/navigation";
-import { Button } from "@/components/ui/button";
 import prisma from "@/lib/prisma";
-import { NextResponse } from "next/server";
 
-import { getSession } from "@/lib/auth";
-import { redirect } from "next/navigation";
 
 import { cookies } from 'next/headers'
 import  jwt  from "jsonwebtoken";

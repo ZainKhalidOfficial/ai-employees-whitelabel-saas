@@ -1,5 +1,4 @@
 
-import { getSession } from "@/lib/auth";
 import prisma from "@/lib/prisma";
 // import { stripe } from "@/lib/stripe";
 import { absoluteUrl } from "@/lib/utils";
@@ -23,7 +22,6 @@ export async function POST(
         const body = await req.json();
         const { planSelected } = body;
         console.log("I'm inside the stripeWhitelabel Api.")
-        // const session = await getSession();
 
         const session = await getUserToken();
 
