@@ -6,7 +6,7 @@ import { BeatLoader } from "react-spinners"
 import { useToast } from "@/components/ui/use-toast"
 import { cn } from "@/lib/utils";
 import { ExpertBotAvatar } from "@/components/expert-bot-avatar";
-import { ExpertUserAvatar } from "@/components/user-bot-avatar";
+// import { ExpertUserAvatar } from "@/components/user-bot-avatar";
 import { Button } from "./ui/button";
 import { Copy } from "lucide-react";
 
@@ -53,7 +53,8 @@ export const ExpertChatMessage = ({
                   :  content}
             </div>
 
-            {role === "user" && <ExpertUserAvatar />}
+            {/* {role === "user" && <ExpertUserAvatar />} */}
+            {role === "user" && src &&  <ExpertBotAvatar src={src} />}
             {role !== "user" && !isLoading && (
                 <Button
                     onClick={onCopy}

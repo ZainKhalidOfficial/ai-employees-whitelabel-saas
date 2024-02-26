@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useTransition } from "react";
 import { Post } from "@prisma/client";
-import { updatePost, updatePostMetadata } from "@/lib/actions";
+import { updatePost } from "@/lib/actions"; //updatePostMetadata
 import { Editor as NovelEditor } from "novel";
 import TextareaAutosize from "react-textarea-autosize";
 import { cn } from "@/lib/utils";
@@ -56,21 +56,23 @@ export default function Editor({ post }: { post: PostWithSite }) {
         </div>
         <button
           onClick={() => {
-            const formData = new FormData();
-            console.log(data.published, typeof data.published);
-            formData.append("published", String(!data.published));
-            startTransitionPublishing(async () => {
-              await updatePostMetadata(formData, post.id, "published").then(
-                () => {
-                  toast.success(
-                    `Successfully ${
-                      data.published ? "unpublished" : "published"
-                    } your post.`,
-                  );
-                  setData((prev) => ({ ...prev, published: !prev.published }));
-                },
-              );
-            });
+
+            // const formData = new FormData();
+            // console.log(data.published, typeof data.published);
+            // formData.append("published", String(!data.published));
+            // startTransitionPublishing(async () => {
+            //   await updatePostMetadata(formData, post.id, "published").then(
+            //     () => {
+            //       toast.success(
+            //         `Successfully ${
+            //           data.published ? "unpublished" : "published"
+            //         } your post.`,
+            //       );
+            //       setData((prev) => ({ ...prev, published: !prev.published }));
+            //     },
+            //   );
+            // });
+
           }}
           className={cn(
             "flex h-7 w-24 items-center justify-center space-x-2 rounded-lg border text-sm transition-all focus:outline-none",

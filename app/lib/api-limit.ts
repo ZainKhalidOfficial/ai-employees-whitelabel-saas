@@ -1,42 +1,44 @@
 
 import prisma from "@/lib/prisma";
 import { MAX_FREE_COUNT } from "@/constants";
+import { getUserToken } from "../helpers/getUserToken";
 
 export const increaseApiLimit = async () => {
-    const { userId } = auth();
+    // const { userId } = auth();
+    const session = await getUserToken() 
 
-    if(!userId) {
+    if(!session?.user.id) {
         return;
     }
 
     const userApiLimit = await prisma.userApiLimit.findUnique({
         where: {
-            userid: userId
+            userid: session?.user.id
         }
     });
 
     if (userApiLimit) {
         await prisma.userApiLimit.update({
-            where: {userid: userId},
+            where: {userid: session?.user.id},
             data: {tokensUsed: userApiLimit.tokensUsed + 1},
         });
     } else {
         await prisma.userApiLimit.create({
-            data: { userid: userId, tokensUsed: 1 }
+            data: { userid: session?.user.id, tokensUsed: 1 }
         });
     }
 };
 
 export const checkApiLimit = async () => {
-    const { userId } = auth();
-
-    if (!userId) {
+    // const { userId } = auth();
+    const session = await getUserToken() 
+    if (!session?.user.id) {
         return false;
     }
 
     const userApiLimit = await prisma.userApiLimit.findUnique({
         where : {
-            userid: userId
+            userid: session?.user.id
         }
     });
 
