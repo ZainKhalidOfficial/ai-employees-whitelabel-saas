@@ -5,7 +5,7 @@ import prisma from "@/lib/prisma";
 // import { NextApiRequest } from "next";
 import { getUserToken } from "@/app/helpers/getUserToken";
 
-const VERCEL_DEPLOYMENT = !!process.env.VERCEL_URL;
+// const VERCEL_DEPLOYMENT = !!process.env.VERCEL_URL;
 
 
 // //Original Code 
@@ -158,17 +158,17 @@ const VERCEL_DEPLOYMENT = !!process.env.VERCEL_URL;
 // };
 
 
-export function getSession() {
-  return getServerSession(authOptions) as Promise<{
-    user: {
-      id: string;
-      name: string;
-      username: string;
-      email: string;
-      image: string;
-    };
-  } | null>;
-}
+// export function getSession() {
+//   return getServerSession(authOptions) as Promise<{
+//     user: {
+//       id: string;
+//       name: string;
+//       username: string;
+//       email: string;
+//       image: string;
+//     };
+//   } | null>;
+// }
 
 export function withSiteAuth(action: any) {
   return async (
@@ -198,32 +198,32 @@ export function withSiteAuth(action: any) {
   };
 }
 
-export function withPostAuth(action: any) {
-  return async (
-    formData: FormData | null,
-    postId: string,
-    key: string | null,
-  ) => {
-    const session = await getSession();
-    if (!session?.user.id) {
-      return {
-        error: "Not authenticated",
-      };
-    }
-    const post = await prisma.post.findUnique({
-      where: {
-        id: postId,
-      },
-      include: {
-        site: true,
-      },
-    });
-    if (!post || post.userId !== session.user.id) {
-      return {
-        error: "Post not found",
-      };
-    }
+// export function withPostAuth(action: any) {
+//   return async (
+//     formData: FormData | null,
+//     postId: string,
+//     key: string | null,
+//   ) => {
+//     const session = await getSession();
+//     if (!session?.user.id) {
+//       return {
+//         error: "Not authenticated",
+//       };
+//     }
+//     const post = await prisma.post.findUnique({
+//       where: {
+//         id: postId,
+//       },
+//       include: {
+//         site: true,
+//       },
+//     });
+//     if (!post || post.userId !== session.user.id) {
+//       return {
+//         error: "Post not found",
+//       };
+//     }
 
-    return action(formData, post, key);
-  };
-}
+//     return action(formData, post, key);
+//   };
+// }
