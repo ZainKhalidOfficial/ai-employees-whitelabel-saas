@@ -3,7 +3,7 @@ import { StreamingTextResponse, LangChainStream } from "ai";
 // import { Replicate } from "langchain/llms/replicate";
 import { NextResponse } from "next/server";
 
-import { MemoryManager } from "@/lib/memory";
+// import { MemoryManager } from "@/lib/memory";
 import { rateLimit } from "@/lib/rate-limit";
 import prisma from "@/lib/prisma";
 import { use } from "react";
