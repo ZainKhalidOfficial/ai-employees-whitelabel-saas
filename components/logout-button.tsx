@@ -1,7 +1,7 @@
 "use client";
 
 import { LogOut } from "lucide-react";
-import { signOut } from "next-auth/react";
+// import { signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import axios, { AxiosError } from "axios";
 import { useToast } from "@/components/ui/use-toast";
