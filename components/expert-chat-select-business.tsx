@@ -6,7 +6,6 @@ import { Button } from "./ui/button";
 import { ArrowDown, Building, Building2, ChevronLeft, Edit, MessagesSquare, MoreVertical, Trash } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { ExpertBotAvatar } from "@/components/expert-bot-avatar";
-// import { useUser } from "@clerk/nextjs";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { useToast } from "@/components/ui/use-toast";
 // import prismadb from "@/lib/prismadb";

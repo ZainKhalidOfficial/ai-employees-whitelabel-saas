@@ -1,4 +1,3 @@
-import { auth } from "@clerk/nextjs";
 
 import prisma from "@/lib/prisma";
 import { MAX_FREE_COUNT } from "@/constants";

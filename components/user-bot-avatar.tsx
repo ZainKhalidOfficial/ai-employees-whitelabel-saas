@@ -1,7 +1,6 @@
 "use client";
 
 import { Avatar, AvatarImage } from "@/components/ui/avatar"
-import { useUser } from "@clerk/nextjs"
 
 export const ExpertUserAvatar = () => {
     const { user } = useUser();

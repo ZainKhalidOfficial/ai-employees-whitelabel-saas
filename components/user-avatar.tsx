@@ -1,5 +1,5 @@
 "use client"
-// import { useUser } from "@clerk/nextjs";
+
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { User } from "@prisma/client"
 
