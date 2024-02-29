@@ -1,7 +1,7 @@
 "use client";
 
 // import LoginButton from "./login-button";
-import { Suspense } from "react";
+import { useState } from "react";
 
 import * as z from "zod";
 import React from "react";
@@ -19,8 +19,8 @@ import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { LoaderIcon } from "lucide-react"
 
 const formSchema = z.object({
   email: z.string().min(5, {
@@ -35,6 +35,7 @@ export default function LoginForm() {
 
   const router = useRouter();
   const { toast } = useToast();
+  const [isLoading, setIsLoading] = useState(false);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -44,20 +45,22 @@ export default function LoginForm() {
     },
   });
 
-  const isLoading = form.formState.isSubmitting;
+  // const isLoading = form.formState.isSubmitting;
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
-      const { data } = await axios.post("/api/authusers/login", values);
+      setIsLoading(true);
+      await axios.post("/api/authusers/login", values);
       // toast({
       //     description : "Success."
       // });
-
 
       router.refresh();
       router.push("/dashboard");
     }
     catch (e) {
+      setIsLoading(false);
+
       toast({
         variant: "destructive",
         description: "Login Failed",
@@ -108,9 +111,6 @@ export default function LoginForm() {
                         {...field}
                       />
                     </FormControl>
-                    <FormDescription>
-                      {/* Enter email with which you signed up. */}
-                    </FormDescription>
                     <FormMessage />
 
                   </FormItem>
@@ -131,9 +131,6 @@ export default function LoginForm() {
                         {...field}
                       />
                     </FormControl>
-                    <FormDescription>
-                      {/* Enter your valid password. */}
-                    </FormDescription>
                     <FormMessage />
 
                   </FormItem>
@@ -148,6 +145,15 @@ export default function LoginForm() {
                 Login
               </Button>
             </div>
+            {isLoading ?
+
+              <div className="w-full flex justify-center gap-2">
+                <LoaderIcon className="animate-spin text-black" />
+              </div>
+              : <div className="w-full flex justify-center gap-2">
+
+              </div>
+            }
 
 
             <div className="w-full flex justify-center text-black hover:text-blue-400">

@@ -8,11 +8,18 @@ export const getDataFromToken = async (request: NextRequest) => {
 
         // const cookies = new RequestCookies(request.headers)
 
-        const token = request.cookies.get("token")?. value || '';
-        
+        const token = request.cookies.get("token")?. value;
+
+        if(!token){
+            console.log("Missing user token");
+            return null;
+        }
+
+        console.log('I am')
+
         // const decodedToken: any = jwt.verify(token, process.env.JWT_SECRET!);
-        const { payload, protectedHeader } = await jwtVerify(token , new TextEncoder().encode(process.env.JWT_SECRET!) )
-        return payload; //decodedToken.id; currently returning whole token
+        const verified = await jwtVerify(token , new TextEncoder().encode(process.env.JWT_SECRET!) )
+        return verified.payload; //decodedToken.id; currently returning whole token
         
     } catch (error: any) {
 

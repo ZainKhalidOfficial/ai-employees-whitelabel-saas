@@ -1,6 +1,7 @@
 
 import { CreateBusinessProfileButton } from "@/components/create-BusinessProfile-Button";
 import { BusinessProfileListPage } from "@/components/businessProfiles";
+import { Suspense } from "react";
 
 
  const BusinessProfilesPage = async () => {
@@ -23,8 +24,9 @@ import { BusinessProfileListPage } from "@/components/businessProfiles";
 
       </div>
 
+      <Suspense>
       <BusinessProfileListPage />
-
+      </Suspense>
     </div>
     
   )

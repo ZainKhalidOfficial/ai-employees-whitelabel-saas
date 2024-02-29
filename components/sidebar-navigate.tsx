@@ -1,13 +1,9 @@
 'use client'
 
 import { cn } from "@/lib/utils";
-import { Montserrat } from "next/font/google";
-import Image from "next/image";
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { LayoutDashboard, Wrench, Building2, Users2, Plus, Settings } from "lucide-react";
-
-const montserrat = Montserrat({weight:"600" , subsets:["latin"]})
 
 const routes = [
     {
@@ -59,6 +55,7 @@ const SidebarNavigate =()=> {
         {
             routes.map((route) => (
                 <Link
+                prefetch={true}
                 href={route.href}
                 key={route.href}
                 className={cn("text-sm group flex p-3 w-full justify-start font-medium cursor-pointer hover:text-white hover:bg-white/10 rounded-lg transition",

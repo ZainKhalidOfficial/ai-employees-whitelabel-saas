@@ -1,26 +1,18 @@
 "use server";
 
-import { Montserrat } from "next/font/google";
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
-
 import { Suspense } from "react";
 import { cn } from "@/lib/utils";
-import { LayoutDashboard, Wrench, Building2, Users2, Plus, Settings } from "lucide-react";
 import { FreeCounter } from "@/components/free-counter";;
-import axios, { AxiosError } from "axios";
-import { useToast } from "./ui/use-toast";
 import SidebarNavigate from "./sidebar-navigate";
-
-
 import { Metadata } from "next";
 import { Card, CardContent } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { Button } from "@/components/ui/button";
 import { Zap } from "lucide-react";
+import LogoutUsers from "./logout-users";
 
-// const montserrat = Montserrat({weight:"600" , subsets:["latin"]})
 
 interface SidebarProps {
     
@@ -33,34 +25,13 @@ const Sidebar = async ({
     siteName = "",
 }: SidebarProps) => {
 
-    // const router = useRouter();
-    // const { toast } = useToast();
 
-    // let deleteCookie = async () =>
-    // {
-    //   try {
-
-    //   const {data} =  await axios.get("/api/authusers/logout");
-
-    //   router.refresh();
-    // }
-    // catch (e) {
-    //     toast({
-    //         variant : "destructive",
-    //         description : "Logout Failed",
-    //     });
-
-    //     const error = e as AxiosError;
-    // }
-    // }
 
     return (
         <div className="space-y-4 py-4 flex flex-col h-full bg-[#111827] text-white">
 
             <div className="px-3 py-2 flex-1">
-
-                <Link href="/dashboard" className="flex items-center pl-3 mb-14">
-
+                <Link prefetch={true} href="/dashboard" className="flex items-center pl-3 mb-14">
                     <div className="relative w-8 h-8 mr-4">
                         <Image
                             fill
@@ -72,10 +43,10 @@ const Sidebar = async ({
                     <h1 className={cn("text-2xl font-bold",)}> {/* montserrat.className */}
                         {siteName}
                     </h1>
-
                 </Link>
+       
 
-                <SidebarNavigate />
+            <SidebarNavigate/>
 
             </div>
 
@@ -102,9 +73,8 @@ const Sidebar = async ({
                 <FreeCounter />
 
             </Suspense>
-            {/* <div className="flex w-full items-center justify-center">
-            <Button className="w-1/4 bg-slate-500" onClick={deleteCookie} >Logout</Button>
-            </div> */}
+
+            <LogoutUsers/>
         </div>
     );
 }

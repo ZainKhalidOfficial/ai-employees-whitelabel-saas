@@ -2,6 +2,7 @@
 
 import { CreateCustomEmployeeButton } from "@/components/create-customEmployee-Button";
 import { CustomExpertsListPage } from "@/components/customExperts";
+import { Suspense } from "react";
 
 
 const customExpertsPage = async () => {
@@ -26,7 +27,9 @@ const customExpertsPage = async () => {
 
       </div>
 
+      <Suspense>
       <CustomExpertsListPage />
+      </Suspense>
 
     </div>
     

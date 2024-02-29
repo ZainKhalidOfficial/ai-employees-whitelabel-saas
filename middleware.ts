@@ -12,8 +12,12 @@ export const config = {
      * 2. /_next (Next.js internals)
      * 3. /_static (inside /public)
      * 4. all root files inside /public (e.g. /favicon.ico)
-     */
-    "/((?!api/|api/webhook/|_next/|_static/|_vercel|images/|[\\w-]+\\.\\w+).*)"
+     */ 
+    "/((?!api/|api/webhook/|_next/|_static/|_vercel|images/|[\\w-]+\\.\\w+).*)",
+    // '/(api|trpc)(.*)',
+    // '/', 
+    // '/((?!.+\\.[\\w]+$|_next).*)', 
+    // "/((?!.*\\..*|_next).*)"
 
   ],
 };
@@ -89,10 +93,12 @@ export async function middleware(req: NextRequest) {
       return response;
     }
   }
-
-  if (session && (path == "/login" || path == "/signup" || path == "/")) {
+  else
+  if ((path == "/login" || path == "/signup" || path == "/")) {
     return NextResponse.redirect(new URL(`/${hostname}/dashboard`, req.url));
   }
+
+  console.log(req.nextUrl.pathname)
 
   return NextResponse.rewrite(new URL(`/${hostname}${path}`, req.url));
 }
