@@ -13,7 +13,7 @@ export async function POST(request: NextRequest) {
         }
 
         //check if user already exists
-        const user = await prisma.tenantUser.findUnique({
+        const user = await prisma.user.findUnique({
             where: {email}
         })
         
@@ -27,7 +27,7 @@ export async function POST(request: NextRequest) {
         
 
                 
-        const newUser = await prisma.tenantUser.create({
+        const newUser = await prisma.user.create({
              data: {
                 username,
                 email,

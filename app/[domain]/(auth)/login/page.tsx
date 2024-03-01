@@ -21,6 +21,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { LoaderIcon } from "lucide-react"
+import { Checkbox } from "@/components/ui/checkbox";
 
 const formSchema = z.object({
   email: z.string().min(5, {
@@ -28,7 +29,7 @@ const formSchema = z.object({
   }),
   password: z.string().min(1, {
     message: "Password is required.",
-  }),
+  })
 })
 
 export default function LoginForm() {
@@ -92,11 +93,11 @@ export default function LoginForm() {
               </p>
 
 
-              <Separator className="bg-primary/10" />
+              <Separator className="bg-stone-200" />
             </div>
 
 
-            <div className="grid grid-cols-1 gap-4">
+            <div className="grid grid-cols-1 gap-2">
               <FormField
                 name="email"
                 control={form.control}
@@ -137,6 +138,8 @@ export default function LoginForm() {
                 )}
               />
 
+
+
             </div>
 
 
@@ -147,10 +150,10 @@ export default function LoginForm() {
             </div>
             {isLoading ?
 
-              <div className="w-full flex justify-center gap-2">
+              <div className="w-full flex justify-center gap-1">
                 <LoaderIcon className="animate-spin text-black" />
               </div>
-              : <div className="w-full flex justify-center gap-2">
+              : <div className="w-full flex justify-center gap-1">
 
               </div>
             }

@@ -176,23 +176,21 @@ export const checkApiLimit = async () => {
 export const getApiLimitCount = async () => {
 
     let decodedToken: any = "";
-
+    let userApiLimit: any = null;
     try {
 
         decodedToken = await getUserToken();
-        
+
+        userApiLimit = await prisma.userApiLimit.findUnique({
+            where: {
+                userid: decodedToken.user.id
+            }
+        });
     
     } catch (error) { 
         console.log("Custom Auth actually failed at exception getApiLimitCount function: ",error);
         return { tokensUsed:0, businessProfilesUsed:0 ,customEmployeesUsed:0 };
-     
-    }
-
-    const userApiLimit = await prisma.userApiLimit.findUnique({
-        where: {
-            userid: decodedToken.user.id
-        }
-    });
+    } 
 
     if(!userApiLimit) {
         //Means user has never used any count

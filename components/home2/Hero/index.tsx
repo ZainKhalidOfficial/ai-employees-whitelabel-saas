@@ -35,7 +35,7 @@ const Hero = () => {
                 </p> */}
 
 <div className="mb-5 text-3xl font-bold leading-tight sm:text-4xl sm:leading-tight md:text-5xl md:leading-tight">
-                <h1 className="text-transparent bg-clip-text  bg-gradient-to-r from-pink-500 via-purple-400 to-indigo-500 ">Whitelabel Genius A.I. 
+                <h1 className="text-transparent bg-clip-text  bg-gradient-to-r from-pink-500 via-purple-400 to-indigo-500 ">Whitelabel Vitexy A.I. 
       </h1>
                 <h1>for Agencies 🚀</h1>
                 <div className="mb-5 text-xl font-bold leading-tigh sm:text-xl sm:leading-tight md:text-xl md:leading-tight text-transparent bg-clip-text  bg-gradient-to-r from-pink-500 via-purple-400 to-indigo-500  ">
@@ -53,7 +53,7 @@ const Hero = () => {
                 </div>
 
                 <p className="text-gray-500 text-lg md:text-xl lg:text-xl xl:text-xl">
-                Genius is built for AI Agencies who want to White Label AI solutions for their clients,
+                Vitexy is built for AI Agencies who want to White Label AI solutions for their clients,
                 without having to spend the time or money to build it out themselves.
                 </p> 
             </div>

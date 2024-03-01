@@ -31,9 +31,8 @@ export const FooterContent = ({
 
             <div className="text-gray-100 text-lg">Policy</div>
             <ul className=" text-gray-400">
-              <li><a href="#" className="hover:text-white">Privacy Policy</a></li>
-              <li><a href="#" className="hover:text-white">Terms and Conditions</a></li>
-              <li><a href="#" className="hover:text-white">GDPR Compliance</a></li>
+              <li><a href="/privacy-policy" className="hover:text-white">Privacy Policy</a></li>
+              <li><a href="/terms-&-conditions" className="hover:text-white">Terms and Conditions</a></li>
             </ul>
           </div>
 

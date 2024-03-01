@@ -82,9 +82,9 @@ export default function SignupForm() {
     <div className="relative flex flex-col justify-center items-center min-h-screen overflow-hidden">
       <div className="p-10 rounded-xl bg-slate-100">
         <Form  {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 h-full pb-10">
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 h-full">
 
-            <div className="space-y-2 w-full text-center">
+            <div className="space-y-1 w-full text-center">
 
               <h3 className="text-lg font-medium text-black">
                 Signup
@@ -94,11 +94,11 @@ export default function SignupForm() {
                 Entering your username, password and valid email to register.
               </p>
 
-              <Separator className="bg-gray-300" />
+              <Separator className="bg-stone-300" />
             </div>
 
 
-            <div className="grid grid-cols-1 gap-4">
+            <div className="grid grid-cols-1 gap-2">
 
               <FormField
                 name="email"
@@ -125,7 +125,7 @@ export default function SignupForm() {
                 control={form.control}
                 render={({ field }) => (
                   <FormItem className="col-span-2 md:col-span-1 text-black">
-                    <FormLabel>Name</FormLabel>
+                    <FormLabel>Username</FormLabel>
                     <FormControl>
                       <Input
                         className="text-white"
@@ -162,6 +162,7 @@ export default function SignupForm() {
                 )}
               />
 
+
             </div>
 
 
@@ -173,19 +174,26 @@ export default function SignupForm() {
 
             {isLoading ?
 
-              <div className="w-full flex justify-center gap-2">
+              <div className="w-full flex justify-center">
                 <LoaderIcon className="animate-spin text-black" />
               </div>
-              : <div className="w-full flex justify-center gap-2">
+              : <div className="w-full flex justify-center">
 
               </div>
             }
+
+            <p className="text-sm  text-gray-400 text-center">
+              By Signing up you agree to our <Link href={"/privacy-policy"} className="text-blue-400">Privacy Policy</Link> and <Link href={"/privacy-policy"} className="text-blue-400">Terms & Conditions</Link>.
+            </p>
 
             <div className="w-full flex justify-center text-black hover:text-blue-400">
               <Link href={"/login"}>
                 Go to Login
               </Link>
             </div>
+
+
+
 
 
           </form>

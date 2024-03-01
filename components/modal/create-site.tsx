@@ -14,7 +14,6 @@ import { useEffect, useState } from "react";
 export default function CreateSiteModal() {
   const router = useRouter();
   const modal = useModal();
-
   const [data, setData] = useState({
     name: "",
     subdomain: "",
@@ -96,6 +95,7 @@ export default function CreateSiteModal() {
               .{process.env.NEXT_PUBLIC_ROOT_DOMAIN}
             </div>
           </div>
+          <p className="text-sm text-stone-600">Note: You can also assign a custom domain later</p>
         </div>
 
         <div className="flex flex-col space-y-2">

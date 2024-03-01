@@ -9,7 +9,7 @@ import Footer from "@/components/home2/Footer";
 import Header from "@/components/home2/Header";
 
 // import "node_modules/react-modal-video/css/modal-video.css";
-import "@/styles1/index.css";
+import "@/styles/index.css";
 import ScrollToTop from "@/components/home2/ScrollToTop";
 
 
@@ -20,7 +20,7 @@ const LandingLayout = ({
 }
 ) => {  //bg-gradient-to-r from-purple-900 via-indigo-700 to-blue-900 overflow-auto
     return ( 
-        <main className="h-full overflow-auto ${inter.className}" suppressHydrationWarning>
+        <main className="h-full overflow-auto ${inter.className}" >
 
             <Header />
             {children}

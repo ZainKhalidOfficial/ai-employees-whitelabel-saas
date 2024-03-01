@@ -12,6 +12,14 @@ import {
   Menu,
   Newspaper,
   Settings,
+  Package,
+  Plus,
+  PlusCircle,
+  PlusSquareIcon,
+  PlusIcon,
+  LucidePlusSquare,
+  PlusSquare,
+  GalleryVerticalEnd,
 } from "lucide-react";
 import {
   useParams,
@@ -52,7 +60,7 @@ export default function Nav({ children }: { children: ReactNode }) {
         {
           name: "Back to All Sites",
           href: "/sites",
-          icon: <ArrowLeft width={18} />,
+          icon: <ArrowLeft className="text-blue-500" width={20} />,
         },
         // {
         //   name: "Posts",
@@ -70,7 +78,7 @@ export default function Nav({ children }: { children: ReactNode }) {
           name: "Settings",
           href: `/site/${id}/settings`,
           isActive: segments.includes("settings"),
-          icon: <Settings width={18} />,
+          icon: <Settings className="text-blue-500" width={20} />,
         },
       ];
     } 
@@ -106,19 +114,25 @@ export default function Nav({ children }: { children: ReactNode }) {
         name: "My Sites",
         href: "/sites",
         isActive: segments[0] === "sites",
-        icon: <Globe className="text-purple-600" width={18} />,
+        icon: <GalleryVerticalEnd className="text-blue-500" width={20} />,
+      },
+      {
+        name: "Create Site",
+        href: "/create-site",
+        isActive: segments[0] === "create-site",
+        icon: <PlusCircle className="text-blue-500" width={20} />,
       },
       {
         name: "My Plan",
         href: "/plan",
         isActive: segments[0] === "plan",
-        icon: <Coins className="text-yellow-600" width={18} />,
+        icon: <Coins className="text-blue-500" width={20} />,
       },
       {
         name: "Settings",
         href: "/settings",
         isActive: segments[0] === "settings",
-        icon: <Settings className="text-blue-500" width={18} />,
+        icon: <Settings className="text-blue-500" width={20} />,
       },
     ];
   }, [segments, id, siteId]);
@@ -154,25 +168,24 @@ export default function Nav({ children }: { children: ReactNode }) {
         } fixed z-10 flex h-full flex-col justify-between border-r border-gray-500 bg-gray-900 p-4 transition-all  sm:w-60 sm:translate-x-0`}
       >
         <div className="grid gap-2">
+        <Link
+              href="/"
+            >
           <div className="flex items-center space-x-2 rounded-lg px-2 py-1.5">
 
             {/* <div className="h-6 rotate-[30deg] border-l border-stone-400 dark:border-stone-500" /> */}
-            <Link
-              href="/"
-              className="rounded-lg p-2 gap-2 text-white flex"
-            >
               <Image
                 src="/logo.png"
-                width={24}
-                height={24}
+                width={30}
+                height={30}
                 alt="Logo"
                 className="dark:scale-110 dark:rounded-full dark:border dark:border-stone-400"
               />
 
-              Genius Whitelabel
+              <p className="text-white font-semibold"> Vitexy Whitelabel </p>
 
-            </Link>
           </div>
+            </Link>
           <div className="grid gap-1">
             {tabs.map(({ name, href, isActive, icon }) => (
               <Link

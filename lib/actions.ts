@@ -26,6 +26,8 @@ const nanoid = customAlphabet(
 export const createSite = async (formData: FormData) => {
 
     const session = await getUserToken();
+    
+
   if (!session?.user.id) {
     return {
       error: "Not authenticated",
@@ -36,22 +38,59 @@ export const createSite = async (formData: FormData) => {
   const subdomain = formData.get("subdomain") as string;
 
   try {
-    const response = await prisma.site.create({
-      data: {
-        name,
-        description,
-        subdomain,
-        user: {
-          connect: {
-            id: session.user.id,
-          },
-        },
-      },
+
+  const subscription = await prisma.tenantSubscription.findUnique({
+    where: {
+        userId: session?.user.id,
+    },
     });
-    await revalidateTag(
-      `${subdomain}.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}-metadata`,
-    );
-    return response;
+
+    if(subscription?.sitesAllowed)
+    {
+      const sitesCount = await prisma.site.count({
+        where: {
+            userId: session?.user.id,
+          }
+    });
+
+      if(subscription?.sitesAllowed > sitesCount)
+      {
+
+        const response = await prisma.site.create({
+          data: {
+            name,
+            description,
+            subdomain,
+            user: {
+              connect: {
+                id: session.user.id,
+              },
+            },
+          },
+        });
+        await revalidateTag(
+          `${subdomain}.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}-metadata`,
+        );
+        return response;
+
+      }
+      else
+      {
+       
+        return {
+          error: "Limit Reached! You've " + sitesCount + " Sites."
+        };
+      }
+    }
+    else
+    {
+      return {
+        error: `Ops! You are not subscribed.`,
+      };
+    }
+
+
+
   } catch (error: any) {
     if (error.code === "P2002") {
       return {
@@ -420,7 +459,7 @@ export const editUser = async (
   const value = formData.get(key) as string;
 
   try {
-    const response = await prisma.user.update({
+    const response = await prisma.tenantUser.update({
       where: {
         id: session.user.id,
       },

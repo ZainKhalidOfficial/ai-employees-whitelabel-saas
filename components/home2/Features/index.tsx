@@ -9,7 +9,7 @@ const Features = () => {
         <div className="container">
           <SectionTitle
             title="Main Features"
-            paragraph="Genius packs a wide array of features among which following are the few key ones."
+            paragraph="Vitexy packs a wide array of features among which following are the few key ones."
             center
           />
 

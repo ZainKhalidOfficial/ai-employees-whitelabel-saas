@@ -14,10 +14,6 @@ export const config = {
      * 4. all root files inside /public (e.g. /favicon.ico)
      */ 
     "/((?!api/|api/webhook/|_next/|_static/|_vercel|images/|[\\w-]+\\.\\w+).*)",
-    // '/(api|trpc)(.*)',
-    // '/', 
-    // '/((?!.+\\.[\\w]+$|_next).*)', 
-    // "/((?!.*\\..*|_next).*)"
 
   ],
 };
@@ -46,7 +42,7 @@ export async function middleware(req: NextRequest) {
 
     const session = await getDataFromToken(req);
 
-    if (!session && !(path == "/login" || path == "/signup")) {
+    if (!session && !(path == "/login" || path == "/signup" || path == "/privacy-policy" || path == "/terms-&-conditions")) {
       return NextResponse.redirect(new URL("/login", req.url));
     } else if (session && (path == "/login" || path == "/signup")) {
       return NextResponse.redirect(new URL("/", req.url));
@@ -73,8 +69,7 @@ export async function middleware(req: NextRequest) {
 
 
   if (!session) {
-
-    if (path == "/login" || path == "/signup" || path == "/") {
+    if (path == "/login" || path == "/signup" || path == "/" || path == "/privacy-policy" || path == "/terms-&-conditions") {
       const response = NextResponse.rewrite(new URL(`/${hostname}${path}`, req.url));
 
       //encrypt domainName

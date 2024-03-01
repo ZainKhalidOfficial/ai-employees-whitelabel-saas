@@ -62,7 +62,7 @@ export const LandingContent = () => {
 
             <div className="grid grid-cols-1 sm:grid-cols-2  gap-4">
                 {testimonials.map((item) => (
-                    <Card key={item.description} className=" bg-white m-5 hover:bg-purple-50 text-black">
+                    <Card key={item.description} className=" bg-white hover:bg-purple-50 text-black">
                         <CardHeader className="items-center">
                         <item.avatar className={cn(" w-10, h-10",item.color)} />
                             <CardTitle className="text-center justify-center items-center gap-x-2">

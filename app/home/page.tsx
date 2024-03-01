@@ -14,12 +14,11 @@ import { LandingContent } from "@/components/landing-content";
 import { SubscriptionPlan } from "@/components/subscription-plan";
 import { WhitelabelSubscriptionPlan } from "@/components/whitelabel-subscription-plan";
 import { Metadata } from "next";
-import React, { useState, useEffect } from 'react';
 import prisma from "@/lib/prisma";
 
 export const metadata: Metadata = {
-  title: "Whitelabel Genius",
-  description: "Own Genius like it's yours",
+  title: "Whitelabel Vitexy",
+  description: "Own Vitexy like it's yours",
   // other metadata
 };
 
@@ -86,17 +85,17 @@ export default async function Home() {
 
       <div className="grid grid-cols-1 mt-10  text-center ">
       <p className="font-bold text-3xl md:text-4xl">Fully <span className="text-transparent bg-clip-text  bg-gradient-to-r from-pink-500 via-purple-400 to-indigo-500 inline">White Label AI </span> SAAS 📋</p>
-      <p className="text-md md:text-lg m-4 ">Rebrand the entire Genius AI platform as your own SaaS and sell directly to your clients.</p>         
+      <p className="text-md md:text-lg m-4 ">Rebrand the entire Vitexy AI platform as your own SaaS and sell directly to your clients.</p>         
         </div>
 
       <AboutSectionTwo />
 
-      <div className="grid grid-cols-1  text-center ">
+      {/* <div className="grid grid-cols-1  text-center ">
       <p className="font-bold text-3xl md:text-4xl">More than just <span className="text-transparent bg-clip-text  bg-gradient-to-r from-pink-500 via-purple-400 to-indigo-500 inline">AI Chatbots </span> 🤖</p>
       <p className="text-md md:text-lg m-4 ">Users can create personalized AI agents that can answer questions, have pre-knowledge of their businesses and more.</p>         
         </div>
 
-      <AboutSectionOne />
+      <AboutSectionOne /> */}
 
       {/* <div className="grid grid-cols-1  text-center ">
       <p className="font-bold text-3xl md:text-4xl ">Main Features</p>

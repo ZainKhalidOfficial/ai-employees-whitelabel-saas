@@ -24,7 +24,7 @@ const Footer = () => {
                   
                 </Link>
                 <p className="dark:text-body-color-dark mb-9 text-base leading-relaxed text-body-color">
-                  Genius AI Revolution
+                Vitexy AI Revolution
                 </p>
                 <div className="flex items-center">
                   <a
@@ -95,10 +95,10 @@ const Footer = () => {
                 <ul>
                   <li>
                     <a
-                      href="/blogs"
+                      href="#features"
                       className="dark:text-body-color-dark mb-4 inline-block text-base text-body-color duration-300 hover:text-primary dark:hover:text-primary"
                     >
-                      Blog
+                      Features
                     </a>
                   </li>
                   <li>
@@ -111,7 +111,7 @@ const Footer = () => {
                   </li>
                   <li>
                     <a
-                      href="/about"
+                      href="#"
                       className="dark:text-body-color-dark mb-4 inline-block text-base text-body-color duration-300 hover:text-primary dark:hover:text-primary"
                     >
                       About
@@ -129,28 +129,21 @@ const Footer = () => {
                 <ul>
                   <li>
                     <a
-                      href="/"
+                      href="terms-&-conditions"
                       className="dark:text-body-color-dark mb-4 inline-block text-base text-body-color duration-300 hover:text-primary dark:hover:text-primary"
                     >
-                      TOS
+                      Terms & Conditions
                     </a>
                   </li>
                   <li>
                     <a
-                      href="/"
+                      href="/privacy-policy"
                       className="dark:text-body-color-dark mb-4 inline-block text-base text-body-color duration-300 hover:text-primary dark:hover:text-primary"
                     >
                       Privacy Policy
                     </a>
                   </li>
-                  <li>
-                    <a
-                      href="/"
-                      className="dark:text-body-color-dark mb-4 inline-block text-base text-body-color duration-300 hover:text-primary dark:hover:text-primary"
-                    >
-                      Refund Policy
-                    </a>
-                  </li>
+
                 </ul>
               </div>
             </div>
@@ -163,28 +156,13 @@ const Footer = () => {
                 <ul>
                   <li>
                     <a
-                      href="/contact"
+                      href="#support"
                       className="dark:text-body-color-dark mb-4 inline-block text-base text-body-color duration-300 hover:text-primary dark:hover:text-primary"
                     >
                       Open Support Ticket
                     </a>
                   </li>
-                  <li>
-                    <a
-                      href="/"
-                      className="dark:text-body-color-dark mb-4 inline-block text-base text-body-color duration-300 hover:text-primary dark:hover:text-primary"
-                    >
-                      Terms of Use
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="/about"
-                      className="dark:text-body-color-dark mb-4 inline-block text-base text-body-color duration-300 hover:text-primary dark:hover:text-primary"
-                    >
-                      About
-                    </a>
-                  </li>
+
                 </ul>
               </div>
             </div>

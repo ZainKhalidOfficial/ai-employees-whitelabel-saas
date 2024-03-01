@@ -1,7 +1,4 @@
-import { getUserToken } from "@/app/helpers/getUserToken";
 import { NextRequest,NextResponse } from "next/server";
-import { TenantUser } from "@prisma/client";
-import prisma from "@/lib/prisma";
 import { getDataFromToken } from "@/app/helpers/getDataFromToken";
 
 

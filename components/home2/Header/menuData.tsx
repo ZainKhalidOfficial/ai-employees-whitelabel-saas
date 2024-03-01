@@ -4,25 +4,25 @@ const menuData: Menu[] = [
   {
     id: 1,
     title: "Home",
-    path: "#",
+    path: "/#",
     newTab: false,
   },
   {
     id: 2,
     title: "Features",
-    path: "#features",
+    path: "/#features",
     newTab: false,
   },
   {
     id: 33,
     title: "Pricing",
-    path: "#pricing",
+    path: "/#pricing",
     newTab: false,
   },
   {
     id: 3,
     title: "Support",
-    path: "#support",
+    path: "/#support",
     newTab: false,
   },
   {
@@ -32,22 +32,16 @@ const menuData: Menu[] = [
     submenu: [
       {
         id: 41,
-        title: "TOS",
-        path: "#tos",
+        title: "Terms & Conditions",
+        path: "/terms-&-conditions",
         newTab: false,
       },
       {
         id: 42,
         title: "Privacy Policy",
-        path: "#privacypolicy",
+        path: "/privacy-policy",
         newTab: false,
-      },
-      {
-        id: 43,
-        title: "Refund Policy",
-        path: "#refundpolicy",
-        newTab: false,
-      },
+      }
       
     ],
   },

@@ -54,6 +54,7 @@ export async function POST(
             return new NextResponse(JSON.stringify({ url: stripeSession.url }));
 
         }
+        
         const stripeSession = await stripe.checkout.sessions.create({
             success_url: settingsUrl,
             cancel_url: settingsUrl,

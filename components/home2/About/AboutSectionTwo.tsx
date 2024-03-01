@@ -31,7 +31,7 @@ const AboutSectionTwo = () => {
                 Your Domain Name 
                 </h3>
                 <p className="text-base font-medium leading-relaxed text-body-color sm:text-lg sm:leading-relaxed">
-                Customize the entire platform with your agency&apos;s sub domain or unique custom domain. (mysubdomain.genius.ai 👉 mydomain.com)
+                Customize the entire platform with your agency&apos;s sub domain or unique custom domain. (mysubdomain.vitexy.ai 👉 mydomain.com)
                 </p>
               </div>
               <div className="mb-9">

@@ -41,20 +41,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    //  <ClerkProvider>
     <html lang="en" suppressHydrationWarning>
       <body className={cn(cal.variable, inter.variable)}>
         {/* <ToasterProvider /> */}
 
         {/* <ThemeProvider attribute='class' defaultTheme='system' enableSystem> */}
-        {/* <Providers> */}
+        <Providers>
           {children}
           {/* <Analytics /> */}
-        {/* </Providers> */}
+        </Providers>
         {/* <Toaster /> */}
         {/* </ThemeProvider> */}
       </body>
     </html>
-    //  </ClerkProvider>  
   );
 }

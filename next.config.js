@@ -5,11 +5,17 @@ module.exports = {
   // experimental: {
   //   serverActions: true,
   // },
+  //
   images: {
     remotePatterns: [
       {
         protocol: 'https',
         hostname: "public.blob.vercel-storage.com",
+        pathname: '/**'
+      },
+      {
+        protocol: 'https',
+        hostname: "qvog6upgamt6c3fm.public.blob.vercel-storage.com",
         pathname: '/**'
       },
       {
