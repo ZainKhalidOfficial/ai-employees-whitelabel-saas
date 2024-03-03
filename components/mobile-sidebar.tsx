@@ -16,7 +16,7 @@ import SidebarNavigate from "./sidebar-navigate";
 import { CardContent } from "./ui/card";
 import { FreeCounterDisplay } from "./free-counter-display";
 import Image from "next/image";
-import { logout } from "@/lib/auth";
+// import { logout } from "@/lib/auth";
 import { redirect } from "next/navigation";
 
 interface MobileSidebarProps {
