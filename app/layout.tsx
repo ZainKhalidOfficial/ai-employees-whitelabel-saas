@@ -2,12 +2,12 @@ import "./globals.css";
 import { cal, inter } from "@/styles/fonts";
 import { Analytics } from "@vercel/analytics/react";
 // import { ClerkProvider } from '@clerk/nextjs'
-import { Providers } from "./providers";
+// import { Providers } from "./providers";
 import { Metadata } from "next";
 import { cn } from "@/lib/utils";
 
-import { ToasterProvider } from '@/components/toaster-provider'
-import { ThemeProvider } from '@/components/theme-provider'
+// import { ToasterProvider } from '@/components/toaster-provider'
+// import { ThemeProvider } from '@/components/theme-provider'
 import { Toaster } from "sonner";
 
 const title =

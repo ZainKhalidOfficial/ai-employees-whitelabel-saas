@@ -33,9 +33,9 @@ export async function POST(request: NextRequest) {
             return NextResponse.json({error: "Invalid Password"}, {status: 400, statusText: "Invalid Password"})
         }
 
-        if(!user.isVerified) {
-            return NextResponse.json({error: "User Unverified"}, {status: 400, statusText: `Please verify your email address. We've sent an email at ${user.email}`})
-        }
+        // if(!user.isVerified) {
+        //     return NextResponse.json({error: "User Unverified"}, {status: 400, statusText: `Please verify your email address. We've sent an email at ${user.email}`})
+        // }
         
         const tokenData = {
             id: user.id,

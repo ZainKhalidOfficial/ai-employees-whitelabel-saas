@@ -59,14 +59,32 @@ export const sendEmail = async ({ email, emailType, userId, domain, userType }: 
       }
     }
 
+    // var transport = nodemailer.createTransport({
+    //   host: "sandbox.smtp.mailtrap.io",
+    //   port: 2525,
+    //   auth: {
+    //     user: "a5115902e46571",
+    //     pass: "2d043be4245844"
+    //   }
+    // });
+
+    // const transport = nodemailer.createTransport({
+    //   service: 'gmail',
+    //   auth: {
+    //     user: 'mzainkhalid922@gmail.com',
+    //     pass: '#Zain922397' // naturally, replace both with your real credentials or an application-specific password
+    //   }
+    // });
+
     var transport = nodemailer.createTransport({
-      host: "sandbox.smtp.mailtrap.io",
-      port: 2525,
+      host: "live.smtp.mailtrap.io",
+      port: 587,
       auth: {
-        user: "a5115902e46571",
-        pass: "2d043be4245844"
+        user: "api",
+        pass: "bc6fd8ab8bb51acf952d84077811a5cb"
       }
     });
+
     //TODO: Add these to env.
 
     const mailOptions = {
@@ -80,7 +98,13 @@ export const sendEmail = async ({ email, emailType, userId, domain, userType }: 
             </p>`
     }
 
-    const mailresponse = await transport.sendMail(mailOptions);
+    const mailresponse = await transport.sendMail(mailOptions, function(error, info){
+      if (error) {
+      console.log("Email Error: ",error);
+      } else {
+        console.log('Email sent: ' + info.response);
+      }
+    });
 
     return mailresponse;
 
