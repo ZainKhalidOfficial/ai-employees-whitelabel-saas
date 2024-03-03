@@ -7,6 +7,7 @@ import { getSiteData } from "@/lib/fetchers";
 import { notFound } from "next/navigation";
 import { getDomainName } from "@/app/helpers/getDomainName";
 import MobileSidebar from "@/components/mobile-sidebar";
+import { logout } from "@/lib/actions";
 
 interface UserResponse {
   user: string | null;
@@ -26,24 +27,9 @@ const DashboardLayout = async ({
   ]);
 
 
-  let deleteCookie = async () => {
-    try {
-
-      const { data } = await axios.get("/api/authusers/logout");
-
-    }
-    catch (e) {
-
-      const error = e as AxiosError;
-
-      console.log("Exception at [domain]/layout : ", error);
-    }
-  }
-
   if (!data || !domainName) {
 
-    deleteCookie();
-
+    logout;
     notFound();
   }
 
@@ -60,13 +46,13 @@ const DashboardLayout = async ({
 
         <div className="hidden h-full md:flex md:w-72 md:flex-col md:fixed md:inset-y-0 bg-gray-900">
 
-          <Suspense fallback={<p>loading...</p>}> <Sidebar logo={data.logo} siteName={data.name} /> </Suspense>
+          <Suspense> <Sidebar logo={data.logo} siteName={data.name} /> </Suspense>
 
         </div>
         <main className="md:pl-72 mx-auto h-full w-full">
            {/* <MobileSidebar logo={data.logo} siteName={data.name}/> */}
           
-          <Suspense fallback={<p>loading...</p>} > <Navbar logo={data.logo} siteName={data.name} /> </Suspense>
+          <Suspense> <Navbar logo={data.logo} siteName={data.name} /> </Suspense>
 
           <Suspense fallback={
             <div className="flex justify-center items-center gap-2 h-screen">

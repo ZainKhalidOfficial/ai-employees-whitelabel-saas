@@ -9,7 +9,7 @@ import PlaceholderCard from "@/components/placeholder-card";
 import OverviewSitesCTA from "@/components/overview-sites-cta";
 
 import { Card } from "@/components/ui/card";
-import { ArrowRight, PlusCircleIcon, Coins, GalleryVerticalEnd } from "lucide-react";
+import { ArrowRight, PlusCircleIcon, Coins, GalleryVerticalEnd, MessageSquarePlusIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useRouter } from "next/navigation";
 
@@ -36,6 +36,32 @@ const tools = [
     href: '/plan'
   }
 ]
+
+const messages = [
+  {
+    label:'+ Add stock experts yourself',
+    text: 'Coming Soon!',
+    icon: MessageSquarePlusIcon,
+    color: 'text-green-500',
+    bgColor: 'bg-green-500/10',
+    href: '/dashboard'
+  },
+  {
+    label:'+ Database RAG support for sites',
+    text: 'Coming Soon!',
+    icon: MessageSquarePlusIcon,
+    color: 'text-green-500',
+    bgColor: 'bg-green-500/10',
+    href: '/dashboard'
+  },
+  {
+    label:'+ More Stock Experts',
+    text: 'Development!',
+    icon: MessageSquarePlusIcon,
+    color: 'text-blue-300',
+    bgColor: 'bg-green-300/10',
+    href: '/dashboard'
+  }]
 
 
 export default function Overview() {
@@ -70,6 +96,27 @@ export default function Overview() {
               </div>
               <div className="font-semibold" >
                 {tool.label}
+              </div>
+            </div>
+            <ArrowRight className="w-5 h-5" />
+          </Card>
+        ))}
+         <h2 className="p-2 font-bold">Notice Board!</h2>
+      {messages.map((message) => (
+          <Card 
+          onClick={() => push(message.href)}
+          key={message.href}
+          className="p-4 border-black/5 flex items-center justify-between hover:shadow-md transition cursor-pointer"
+          >
+            <div className="flex items-center gap-x-4">
+              <div className={cn("p-2 w-fit rounded-md", message.bgColor)}>
+              <message.icon className={cn("w-8 h-8", message.color)} />
+              </div>
+              <div className="font-semibold" >
+                {message.label}
+              </div>
+              <div className="text-green-500 font-light" >
+                ({message.text}) 
               </div>
             </div>
             <ArrowRight className="w-5 h-5" />

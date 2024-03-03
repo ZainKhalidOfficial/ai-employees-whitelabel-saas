@@ -3,7 +3,9 @@ import { NextResponse } from "next/server";
 
 import { cookies } from "next/headers";
 import  jwt  from "jsonwebtoken";
-import { increaseApiLimit } from "@/lib/api-limit";
+import { getApiLimitCount, increaseApiLimit } from "@/lib/api-limit";
+import { checkSubscription } from "@/lib/subscription";
+import { MAX_FREE_COUNT } from "@/constants";
 
 export async function POST(req: Request) {
     try {
@@ -34,6 +36,7 @@ export async function POST(req: Request) {
         if(!name || !description || !instructions || !seed || !src || !categoryId) {
             return new NextResponse("Missing required fields", { status:400 });
         }
+
 
         //TODO: Check for subscription
 

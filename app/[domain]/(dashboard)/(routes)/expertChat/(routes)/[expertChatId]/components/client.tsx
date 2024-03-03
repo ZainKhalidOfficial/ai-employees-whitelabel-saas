@@ -98,7 +98,7 @@ export const ExpertChatClient = ({
         catch (error: any) {
             console.log("Zain Error : ",error);
             if(error?.response?.status === 403) {
-                toast.error("Not Subscribed!");
+                toast.error("Token Limit Reached!");
         
             } else {
                 toast.error("Something went wrong");

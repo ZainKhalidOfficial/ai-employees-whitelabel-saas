@@ -59,6 +59,9 @@ dependencies:
   '@types/node':
     specifier: 18.17.1
     version: 18.17.1
+  '@types/nodemailer':
+    specifier: ^6.4.14
+    version: 6.4.14
   '@types/react':
     specifier: 18.2.22
     version: 18.2.22
@@ -135,8 +138,8 @@ dependencies:
     specifier: ^0.2.1
     version: 0.2.1(next@14.1.0)(react-dom@18.2.0)(react@18.2.0)
   nodemailer:
-    specifier: ^6.9.7
-    version: 6.9.7
+    specifier: ^6.9.11
+    version: 6.9.11
   novel:
     specifier: ^0.1.22
     version: 0.1.22(@babel/core@7.22.8)(react@18.2.0)(solid-js@1.7.11)(svelte@4.0.5)(vue@3.3.4)
@@ -900,7 +903,7 @@ packages:
       next-auth: ^4
     dependencies:
       '@prisma/client': 5.5.2(prisma@5.5.2)
-      next-auth: 4.23.1(next@14.1.0)(nodemailer@6.9.7)(react-dom@18.2.0)(react@18.2.0)
+      next-auth: 4.23.1(next@14.1.0)(nodemailer@6.9.11)(react-dom@18.2.0)(react@18.2.0)
     dev: false
 
   /@next/env@13.4.20-canary.15:
@@ -2981,6 +2984,12 @@ packages:
 
   /@types/node@18.17.1:
     resolution: {integrity: sha512-xlR1jahfizdplZYRU59JlUx9uzF1ARa8jbhM11ccpCJya8kvos5jwdm2ZAgxSCwOl0fq21svP18EVwPBXMQudw==}
+
+  /@types/nodemailer@6.4.14:
+    resolution: {integrity: sha512-fUWthHO9k9DSdPCSPRqcu6TWhYyxTBg382vlNIttSe9M7XfsT06y0f24KHXtbnijPGGRIcVvdKHTNikOI6qiHA==}
+    dependencies:
+      '@types/node': 18.17.1
+    dev: false
 
   /@types/normalize-package-data@2.4.4:
     resolution: {integrity: sha512-37i+OaWTh9qeK4LSHPsyRC7NahnGotNuZvjLSgcPzblpHB3rrCJxAOgI5gCdKm7coonsaX1Of0ILiTcnZjbfxA==}
@@ -9126,7 +9135,7 @@ packages:
       type-fest: 0.4.1
     dev: false
 
-  /next-auth@4.23.1(next@14.1.0)(nodemailer@6.9.7)(react-dom@18.2.0)(react@18.2.0):
+  /next-auth@4.23.1(next@14.1.0)(nodemailer@6.9.11)(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-mL083z8KgRtlrIV6CDca2H1kduWJuK/3pTS0Fe2og15KOm4v2kkLGdSDfc2g+019aEBrJUT0pPW2Xx42ImN1WA==}
     peerDependencies:
       next: ^12.2.5 || ^13
@@ -9142,7 +9151,7 @@ packages:
       cookie: 0.5.0
       jose: 4.14.4
       next: 14.1.0(@babel/core@7.22.8)(react-dom@18.2.0)(react@18.2.0)
-      nodemailer: 6.9.7
+      nodemailer: 6.9.11
       oauth: 0.9.15
       openid-client: 5.4.3
       preact: 10.16.0
@@ -9307,8 +9316,8 @@ packages:
     resolution: {integrity: sha512-y10wOWt8yZpqXmOgRo77WaHEmhYQYGNA6y421PKsKYWEK8aW+cqAphborZDhqfyKrbZEN92CN1X2KbafY2s7Yw==}
     dev: false
 
-  /nodemailer@6.9.7:
-    resolution: {integrity: sha512-rUtR77ksqex/eZRLmQ21LKVH5nAAsVicAtAYudK7JgwenEDZ0UIQ1adUGqErz7sMkWYxWTTU1aeP2Jga6WQyJw==}
+  /nodemailer@6.9.11:
+    resolution: {integrity: sha512-UiAkgiERuG94kl/3bKfE8o10epvDnl0vokNEtZDPTq9BWzIl6EFT9336SbIT4oaTBD8NmmUTLsQyXHV82eXSWg==}
     engines: {node: '>=6.0.0'}
     dev: false
 

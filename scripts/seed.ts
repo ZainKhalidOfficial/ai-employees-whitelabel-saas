@@ -14,7 +14,7 @@ async function categoryCreation() {
                 {name: "Finance Experts"},
                 {name: "Operations Experts"},
                 {name: "Human Resource Experts"},
-                {name: "Technolog Experts"},
+                {name: "Technology Experts"},
                 {name: "Design Experts"},
             ]
         })

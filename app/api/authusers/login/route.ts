@@ -4,6 +4,7 @@ import prisma from "@/lib/prisma";
 import bcryptjs from "bcryptjs";
 import jwt from "jsonwebtoken"
 import { cookies } from "next/headers";
+import { Verified } from "lucide-react";
 
 export async function POST(request: NextRequest) {
     try {
@@ -12,7 +13,7 @@ export async function POST(request: NextRequest) {
   
         
         if(!email || !password) {
-            return new NextResponse("Missing required fields", { status:400 });
+            return NextResponse.json({error: "Missing required fields"}, {status: 400, statusText: "Missing required fields"})
         }
 
         //check if user already exists
@@ -22,20 +23,25 @@ export async function POST(request: NextRequest) {
         
         if(!user) {
             console.log("User doesn't exist!")
-            return NextResponse.json({error: "User doesn't exists"}, {status: 400})
+            return NextResponse.json({error: "User doesn't exists"}, {status: 400, statusText: "User doesn't exists"})
         }
 
         //check password
         const validPassword = await bcryptjs.compare(password, user.password);
 
         if(!validPassword) {
-            return NextResponse.json({error: "Invalid Password"}, {status: 400})
+            return NextResponse.json({error: "Invalid Password"}, {status: 400, statusText: "Invalid Password"})
+        }
+
+        if(!user.isVerified) {
+            return NextResponse.json({error: "User Unverified"}, {status: 400, statusText: `Please verify your email address. We've sent an email at ${user.email}`})
         }
         
         const tokenData = {
             id: user.id,
             username: user.username,
-            email: user.email
+            email: user.email,
+            verified: user.isVerified
         }
 
 
@@ -58,6 +64,6 @@ export async function POST(request: NextRequest) {
     } catch (error: any) {
         console.log("Login API Failed: ", error.message)
         return NextResponse.json({error: error.message},
-            {status: 500})
+            {status: 500, statusText: error.message})
     }
 }

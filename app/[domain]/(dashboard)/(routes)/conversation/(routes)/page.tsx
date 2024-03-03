@@ -3,8 +3,6 @@
 import axios from "axios";
 import * as z from "zod";
 import { useRouter } from "next/navigation";
-import { Heading } from "@/components/heading";
-import { MessageSquare } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { formSchema } from "./constants";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -19,6 +17,7 @@ import { cn } from "@/lib/utils";
 import { UserAvatar } from "@/components/user-avatar";
 import { BotAvatar } from "@/components/bot-avatar";
 import { toast } from "react-hot-toast";
+import { BeatLoader } from "react-spinners";
 
 
 
@@ -71,7 +70,7 @@ const ConversationPage = () => {
         catch (error: any) {
             console.log(error);
             if(error?.response?.status === 403) {
-                toast.error("Not Subscribed!");
+                toast.error("Token Limit Reached!");
                 
             } else {
                 toast.error("Something went wrong");
@@ -86,14 +85,7 @@ const ConversationPage = () => {
     }
 
     return ( 
-        <div>
-            <Heading 
-            title="Conversation"
-            description="Our most advanced conversation model."
-            icon={MessageSquare}
-            iconColor="text-violet-500"
-            bgColor="text-violet-500/10"
-            />
+
 
             <div className="px-4 lg:px-8">
                 <div>
@@ -143,7 +135,10 @@ const ConversationPage = () => {
                         isLoading && (
                             <div className="p-8 rounded-lg w-full flex items-center
                             justify-center bg-muted"> 
-                                <Loader />
+                                <BeatLoader
+                                size={5}
+                                color={"white"}
+                            />
                             </div>
                         )
                     }
@@ -173,8 +168,6 @@ const ConversationPage = () => {
                     </div>
                 </div>
             </div>
-        </div>
-
         
      );
 }

@@ -6,8 +6,6 @@ import { Button } from "@/components/ui/button"
 
 import { Input } from "@/components/ui/input"
 import { Separator } from "@/components/ui/separator"
-
-import { useToast } from "@/components/ui/use-toast";
 import { useRouter } from "next/navigation";
 
 import axios, { AxiosError } from "axios";
@@ -17,6 +15,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { LoaderIcon } from "lucide-react";
+import { toast } from "sonner";
 
 const formSchema = z.object({
   email: z.string().min(5, {
@@ -34,7 +33,6 @@ const formSchema = z.object({
 export default function SignupForm() {
 
   const router = useRouter();
-  const { toast } = useToast();
   const [isLoading, setIsLoading] = useState(false);
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -55,10 +53,10 @@ export default function SignupForm() {
 
 
       // const {data} =  await axios.post("/api/authuser/login", values);
-      await axios.post("/api/authuser/signup", values);
-      toast({
-        description: "Success."
-      });
+      await axios.post("/api/authtenant/signup", values);
+
+
+      toast.success(`Signup Successful! Verify your email address.`);
 
       // alert(JSON.stringify(data));
 
@@ -67,14 +65,8 @@ export default function SignupForm() {
     }
     catch (e) {
       setIsLoading(false);
-      toast({
-        variant: "destructive",
-        description: "Sign up Failed",
-      });
-
       const error = e as AxiosError;
-
-      // alert(error.message);
+      toast.error(`Signup Failed! ${error.response?.statusText}`);
     }
   }
 
@@ -108,7 +100,7 @@ export default function SignupForm() {
                     <FormLabel>Email</FormLabel>
                     <FormControl>
                       <Input
-                        className="text-white"
+                        className="text-black"
                         disabled={isLoading}
                         placeholder={"Enter Email"}
                         {...field}
@@ -128,7 +120,7 @@ export default function SignupForm() {
                     <FormLabel>Username</FormLabel>
                     <FormControl>
                       <Input
-                        className="text-white"
+                        className="text-black"
                         disabled={isLoading}
                         placeholder={"Enter Name"}
                         {...field}
@@ -149,7 +141,7 @@ export default function SignupForm() {
                     <FormLabel>Password</FormLabel>
                     <FormControl>
                       <Input
-                        className="text-white"
+                        className="text-black"
                         disabled={isLoading}
                         placeholder={"Enter Password"}
                         {...field}

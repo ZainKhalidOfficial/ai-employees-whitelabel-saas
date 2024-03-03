@@ -17,11 +17,20 @@ import { put } from "@vercel/blob";
 import { customAlphabet } from "nanoid";
 import { getBlurDataURL } from "@/lib/utils";
 import { getUserToken } from "@/app/helpers/getUserToken";
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
 const nanoid = customAlphabet(
   "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz",
   7,
 ); // 7-character random string
+
+
+export const logout = async () => {
+  // Destroy the session
+      cookies().set('token', '',{ expires: new Date(0)});
+      redirect('/login');
+}
 
 export const createSite = async (formData: FormData) => {
 

@@ -28,13 +28,14 @@ export async function middleware(req: NextRequest) {
     .get("host")!
     .replace(".localhost:3000", `.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`);
 
+  const path = req.nextUrl.pathname; //removed searchParams.toString(); to add pathname so that search queries get ignored for email
+  
   const searchParams = req.nextUrl.searchParams.toString();
   // Get the pathname of the request (e.g. /, /about, /blog/first-post)
-  const path = `${url.pathname}${searchParams.length > 0 ? `?${searchParams}` : ""
-    }`;
+  let fullpath = `${url.pathname}${searchParams.length > 0 ? `?${searchParams}` : ""}`;
 
 
-
+  // console.log("My path is:",path)
   // rewrites for app pages
   if (hostname == `app.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`) {
 
@@ -42,13 +43,13 @@ export async function middleware(req: NextRequest) {
 
     const session = await getDataFromToken(req);
 
-    if (!session && !(path == "/login" || path == "/signup" || path == "/privacy-policy" || path == "/terms-&-conditions")) {
+    if (!session && !(path == "/login" || path == "/signup" || path == "/verifyemail" || path == "/privacy-policy" || path == "/terms-&-conditions")) {
       return NextResponse.redirect(new URL("/login", req.url));
     } else if (session && (path == "/login" || path == "/signup")) {
       return NextResponse.redirect(new URL("/", req.url));
     }
     return NextResponse.rewrite(
-      new URL(`/app${path === "/" ? "" : path}`, req.url),
+      new URL(`/app${fullpath === "/" ? "" : fullpath}`, req.url),
     );
 
   }
@@ -67,9 +68,8 @@ export async function middleware(req: NextRequest) {
 
   let session = await getDataFromToken(req);
 
-
   if (!session) {
-    if (path == "/login" || path == "/signup" || path == "/" || path == "/privacy-policy" || path == "/terms-&-conditions") {
+    if (path == "/login" || path == "/signup" || path == "/" || path == "/privacy-policy" || path == "/verifyemail" || path == "/terms-&-conditions") {
       const response = NextResponse.rewrite(new URL(`/${hostname}${path}`, req.url));
 
       //encrypt domainName
@@ -95,7 +95,7 @@ export async function middleware(req: NextRequest) {
 
   console.log(req.nextUrl.pathname)
 
-  return NextResponse.rewrite(new URL(`/${hostname}${path}`, req.url));
+  return NextResponse.rewrite(new URL(`/${hostname}${fullpath}`, req.url));
 }
 
 

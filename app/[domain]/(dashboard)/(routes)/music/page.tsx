@@ -17,6 +17,7 @@ import { Empty } from "@/components/empty";
 import { Loader } from "@/components/loader";
 import { cn } from "@/lib/utils";
 import { toast } from "react-hot-toast";
+import { BeatLoader } from "react-spinners";
 
 const MusicPage = () => {
 
@@ -47,7 +48,7 @@ const MusicPage = () => {
              console.log(error);
             if(error?.response?.status === 403) {
             
-                toast.error("Not Subscribed!");
+                toast.error("Token Limit Reached!");
             } else {
                 toast.error("Something went wrong");
             }
@@ -116,7 +117,10 @@ const MusicPage = () => {
                         isLoading && (
                             <div className="p-8 rounded-lg w-full flex items-center
                             justify-center bg-muted"> 
-                                <Loader />
+                                <BeatLoader
+                                size={5}
+                                color={"white"}
+                            />
                             </div>
                         )
                     }

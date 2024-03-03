@@ -3,8 +3,7 @@
 import axios from "axios";
 import * as z from "zod";
 import { useRouter } from "next/navigation";
-import { Heading } from "@/components/heading";
-import { Download, ImageIcon, MessageSquare } from "lucide-react";
+import { Download } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { amountOption, formSchema, resolutionOptions } from "./constants";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -21,6 +20,7 @@ import { Card, CardFooter } from "@/components/ui/card";
 import Image from "next/image";
 
 import { toast } from "react-hot-toast";
+import { BeatLoader } from "react-spinners";
 
 const ImagePage = () => {
 
@@ -56,7 +56,7 @@ const ImagePage = () => {
 
              console.log(error);
             if(error?.response?.status === 403) {
-                toast.error("Not Subscribed!");
+                toast.error("Token Limit Reached!");
               
             } else {
                 toast.error("Something went wrong");
@@ -69,15 +69,7 @@ const ImagePage = () => {
     }
 
     return ( 
-        <div>
-            <Heading 
-            title="Image Generation"
-            description="Turn your prompt into an image."
-            icon={ImageIcon}
-            iconColor="text-pink-700"
-            bgColor="text-pink-700/10"
-            />
-
+        
             <div className="px-4 lg:px-8">
                 <div>
                     <Form {...form}>
@@ -191,7 +183,10 @@ const ImagePage = () => {
                     {
                         isLoading && (
                             <div className="p-20"> 
-                                <Loader />
+                                <BeatLoader
+                                size={5}
+                                color={"white"}
+                            />
                             </div>
                         )
                     }
@@ -233,7 +228,6 @@ const ImagePage = () => {
                     </div>
                 </div>
             </div>
-        </div>
 
         
      );

@@ -1,6 +1,6 @@
-"use client"
 
-import { Link, Menu, Zap } from "lucide-react";
+'use client'
+import { Link, LogOut, Menu, Zap } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
@@ -16,6 +16,8 @@ import SidebarNavigate from "./sidebar-navigate";
 import { CardContent } from "./ui/card";
 import { FreeCounterDisplay } from "./free-counter-display";
 import Image from "next/image";
+import { logout } from "@/lib/auth";
+import { redirect } from "next/navigation";
 
 interface MobileSidebarProps {
     apiLimitCount: {
@@ -67,7 +69,7 @@ const MobileSidebar = ({
                 <div className="space-y-4 py-4 flex flex-col h-full bg-[#111827] text-white">
 
                     <div className="px-3 py-2 flex-1">
-                        
+
                         {/* <Link href="/dashboard" className="flex items-center pl-3 mb-14"> */}
                         <div className="flex items-center pl-3 mb-14">
                             <div className="relative w-8 h-8 mr-4">
@@ -92,6 +94,7 @@ const MobileSidebar = ({
                     <FreeCounterDisplay isPro={isPro} apiLimitCount={apiLimitCount} />
 
                     <LogoutUsers />
+
                 </div>
             </SheetContent>
 

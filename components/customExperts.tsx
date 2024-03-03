@@ -10,9 +10,13 @@ import { ArrowRight, MessageSquare, Music, ImageIcon, VideoIcon, Code, Users2, W
 import { cn } from "@/lib/utils";
 import prisma from "@/lib/prisma";
 
-
+import { CreateCustomEmployeeButton } from "@/components/create-customEmployee-Button";
 import { cookies } from 'next/headers'
 import  jwt  from "jsonwebtoken";
+import { getApiLimitCount } from "@/lib/api-limit";
+import { checkSubscription } from "@/lib/subscription";
+
+
 
 export const CustomExpertsListPage = async () => {
 
@@ -29,8 +33,8 @@ export const CustomExpertsListPage = async () => {
         // router.push("/login");
     }
 
-    let experts;
-    experts = await prisma.companion.findMany({
+    
+    const experts = await prisma.companion.findMany({
         where: {
             userId: decodedToken.id
         },
@@ -38,10 +42,20 @@ export const CustomExpertsListPage = async () => {
             createdAt: "desc"
         }
     });
+
+    const apiLimitCount = await getApiLimitCount();
+    const isPro = await checkSubscription();
     
     
     if(experts.length === 0) {
         return (
+            <>
+            <div className="w-full mx-auto m-10 text-center items-center justify-center">
+                               
+            <CreateCustomEmployeeButton customEmployeesAllowed={isPro.customEmployeesAllowed} customEmployeesUsed={apiLimitCount.customEmployeesUsed}/>
+      
+            </div>
+      
             <div className="pt-10 flex flex-col items-center justify-center space-y-3">
                 <div className="relative w-60 h-60">
                     <Image
@@ -55,6 +69,7 @@ export const CustomExpertsListPage = async () => {
                     No Custom Experts found.
                 </p>
             </div>
+            </>
         )
     } else 
     {
@@ -62,6 +77,13 @@ export const CustomExpertsListPage = async () => {
     
 
     return (
+        <>
+        <div className="w-full mx-auto m-10 text-center items-center justify-center">
+                               
+        <CreateCustomEmployeeButton customEmployeesAllowed={isPro.customEmployeesAllowed} customEmployeesUsed={apiLimitCount.customEmployeesUsed}/>
+  
+        </div>
+  
 
         <div className='px-4 md:px-20 lg:px-32 space-y-4'>
         {experts.map((item) => (
@@ -88,14 +110,15 @@ export const CustomExpertsListPage = async () => {
 
             </div>
              <div className="flex gap-x-5"> 
-              <p>Go to Edit / Delete</p>
+              <p>Edit</p>
               <ArrowRight className="w-5 h-5" />
               </div>
 
             </Link>
           </Card>
         ))}
-      </div>      
+      </div>
+      </>      
     )
           }
 }

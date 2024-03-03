@@ -5,7 +5,7 @@ module.exports = {
   // experimental: {
   //   serverActions: true,
   // },
-  //
+  //oaidalleapiprodscus.blob.core.windows.net
   images: {
     remotePatterns: [
       {
@@ -16,6 +16,11 @@ module.exports = {
       {
         protocol: 'https',
         hostname: "qvog6upgamt6c3fm.public.blob.vercel-storage.com",
+        pathname: '/**'
+      },
+      {
+        protocol: 'https',
+        hostname: "oaidalleapiprodscus.blob.core.windows.net",
         pathname: '/**'
       },
       {

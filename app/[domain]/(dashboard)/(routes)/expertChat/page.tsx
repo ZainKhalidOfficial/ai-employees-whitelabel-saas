@@ -1,7 +1,4 @@
 
-import { Heading } from "@/components/heading";
-import { Users } from "lucide-react";
-
 import { SearchInput } from "@/components/search-input";
 
 import { Categories } from "@/components/categories";
@@ -124,24 +121,11 @@ const ExpertsPage =async ({
     // }
 
     return ( 
-        <div>
-            <Heading 
-            title="Experts"
-            description="Our industry leading ai experts."
-            icon={Users}
-            iconColor="text-violet-500"
-            bgColor="text-violet-500/10"
-            />
-
             <div className="h-full p-4 space-y-2">
                 <SearchInput />
                 <Categories data={categories} />
                 <Experts data={data} />
             </div>
-
-        </div>
-
-        
      );
 }
  

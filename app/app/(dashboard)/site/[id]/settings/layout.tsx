@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ReactNode, Suspense } from "react";
 import prisma from "@/lib/prisma";
 import { notFound, redirect } from "next/navigation";
 import SiteSettingsNav from "./nav";
@@ -49,7 +49,9 @@ export default async function SiteAnalyticsLayout({
         </a>
       </div>
       <SiteSettingsNav />
+      <Suspense>
       {children}
+      </Suspense>
     </>
   );
 }

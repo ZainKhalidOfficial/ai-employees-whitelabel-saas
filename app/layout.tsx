@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils";
 
 import { ToasterProvider } from '@/components/toaster-provider'
 import { ThemeProvider } from '@/components/theme-provider'
-import { Toaster } from '@/components/ui/toaster'
+import { Toaster } from "sonner";
 
 const title =
   "Platforms Starter Kit – The all-in-one starter kit for building multi-tenant applications.";
@@ -46,10 +46,13 @@ export default function RootLayout({
         {/* <ToasterProvider /> */}
 
         {/* <ThemeProvider attribute='class' defaultTheme='system' enableSystem> */}
-        <Providers>
+
+        <Toaster className="dark:hidden" />
+        <Toaster theme="dark" className="hidden dark:block" />
+
           {children}
           {/* <Analytics /> */}
-        </Providers>
+
         {/* <Toaster /> */}
         {/* </ThemeProvider> */}
       </body>

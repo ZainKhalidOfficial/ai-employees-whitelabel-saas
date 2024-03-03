@@ -16,6 +16,7 @@ import { Delete, Wand2 } from "lucide-react";
 import axios from "axios";
 import { useToast } from "@/components/ui/use-toast";
 import { useRouter } from "next/navigation";
+import { revalidatePath } from "next/cache";
 
 const PREMBLE = `You are Zain Khalid, a seasoned data scientist and machine learning engineer specializing in enterprise-level AI SaaS application development. Your expertise lies in AI solution design, SaaS app development, data management, machine learning techniques, and cloud infrastructure. You will provide expert insights in these areas, emphasizing the importance of ethical AI, client engagement, troubleshooting, and staying up-to-date with the latest industry trends. Please respond with a confident and informative tone, reflecting your deep knowledge and experience in these domains.`;
 
@@ -42,16 +43,20 @@ interface ExpertFormProps {
 const formSchema = z.object({
     name: z.string().min(1,{
         message: "Name is required.",
-    } ),
+    } ).max(25,{
+        message: "Name cannot be longer than 20 charaters"}),
     description: z.string().min(1,{
-        message: "Description is required.",
-    } ),
+        message: "Title is required.",
+    } ).max(25,{
+        message: "Title cannot be longer than 20 charaters"}),
     instructions: z.string().min(200,{
         message: "Instructions require atleast 200 characters.",
-    } ),
+    } ).max(1200,{
+        message: "Instructions cannot be longer than 1000 charaters"}),
     seed: z.string().min(200,{
         message: "Seed require atleast 200 characters.",
-    } ),
+    } ).max(1500,{
+        message: "Seed Chat cannot be longer than 1500 charaters"}),
     src: z.string().min(1,{
         message: "Image is required.",
     } ),
@@ -96,8 +101,8 @@ export const ExpertForm = ({
                 description : "Success."
             });
 
+            router.push("/customExpert");
             router.refresh();
-            router.push("/customExpertPage");
         }
         catch (error) {
             toast({
@@ -122,8 +127,8 @@ export const ExpertForm = ({
                 description : "Profile deleted successfuly"
             });
             
+            router.push("/customExpert");
             router.refresh();
-            router.push("/customExpertPage");
         }
         catch (error) {
 
@@ -161,6 +166,9 @@ export const ExpertForm = ({
                                         value={field.value}
                                     />
                                 </FormControl>
+                                <FormDescription>
+                                        Recommended size is 400 x 400.
+                                    </FormDescription>
                                 <FormMessage /> 
                             </FormItem>
                         )}

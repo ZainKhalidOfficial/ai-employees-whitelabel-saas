@@ -1,6 +1,5 @@
 "use client";
 
-// import LoginButton from "./login-button";
 import { useState } from "react";
 
 import * as z from "zod";
@@ -10,8 +9,6 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 
 import { Separator } from "@/components/ui/separator"
-
-import { useToast } from "@/components/ui/use-toast";
 import { useRouter } from "next/navigation";
 
 import axios, { AxiosError } from "axios";
@@ -21,7 +18,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { LoaderIcon } from "lucide-react"
-import { Checkbox } from "@/components/ui/checkbox";
+import { toast } from "sonner";
 
 const formSchema = z.object({
   email: z.string().min(5, {
@@ -35,7 +32,6 @@ const formSchema = z.object({
 export default function LoginForm() {
 
   const router = useRouter();
-  const { toast } = useToast();
   const [isLoading, setIsLoading] = useState(false);
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -52,9 +48,6 @@ export default function LoginForm() {
     try {
       setIsLoading(true);
       await axios.post("/api/authusers/login", values);
-      // toast({
-      //     description : "Success."
-      // });
 
       router.refresh();
       router.push("/dashboard");
@@ -62,14 +55,9 @@ export default function LoginForm() {
     catch (e) {
       setIsLoading(false);
 
-      toast({
-        variant: "destructive",
-        description: "Login Failed",
-      });
-
       const error = e as AxiosError;
 
-      // alert(error.message);
+      toast.error(`Login Failed! ${error.response?.statusText}`);
     }
   }
 

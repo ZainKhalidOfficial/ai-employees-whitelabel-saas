@@ -38,14 +38,18 @@ const ExpertChatId = async ({
         }
     });
 
-    const businessProfiles = await prisma.businessProfile.findMany({
+    let businessProfiles = await prisma.businessProfile.findMany({
         where: {
             userId: userData?.user.id,
         },
     });
 
+    businessProfiles.unshift({id:'none1',userId:'none2', userName: 'none3', name:'None',
+    profileData:'', createdAt:(new Date(Date.now())),
+    updatedAt: (new Date(Date.now()))});
+
     if(!expert) {
-        return redirect("/dashboard")
+        return redirect("/experts")
     }
     return ( 
         <ExpertChatClient expert={expert} businessProfiles={businessProfiles} user={userData?.user} />

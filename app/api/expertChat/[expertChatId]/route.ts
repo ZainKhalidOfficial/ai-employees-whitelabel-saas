@@ -1,69 +1,67 @@
 import { StreamingTextResponse, LangChainStream } from "ai";
 // import { CallbackManager } from "langchain/callbacks";
 // import { Replicate } from "langchain/llms/replicate";
-import { NextResponse } from "next/server";
 
 // import { MemoryManager } from "@/lib/memory";
 import { rateLimit } from "@/lib/rate-limit";
 import prisma from "@/lib/prisma";
 import { use } from "react";
 
-
+import {NextRequest, NextResponse } from "next/server";
 
 // import { Configuration, OpenAIApi } from "openai";
 import OpenAI from "openai";
-import { increaseApiLimit, checkApiLimit } from "@/lib/api-limit";
+import { increaseApiLimit, checkApiLimit, getApiLimitCount } from "@/lib/api-limit";
 import { checkSubscription } from "@/lib/subscription";
 import { cookies } from "next/headers";
 import  jwt  from "jsonwebtoken";
+import { getDataFromToken } from "@/app/helpers/getDataFromToken";
+import { MAX_FREE_COUNT } from "@/constants";
 
 const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY 
 });
 
 export async function POST(
-    request: Request,
+    req: NextRequest,
     { params }: { params: { expertChatId: string } }
   ) {
     try {
 
         // const { userId } = auth();
-        const body = await request.json();
+        const body = await req.json();
         const { messages, businessId, modelName } = body;
 
-        // const user = await currentUser();
+        // let decodedToken: any = "";
+
+        // try {
+        //     const token = cookies().get('token')?. value || '';
+    
+        //     decodedToken = jwt.verify(token , process.env.JWT_SECRET!)
+        //     // console.log("data : ", decodedToken.id);
         
-        // if(!userId) {
+        // } catch (error) { 
+        //     console.log("Custom Auth failed exception at expertChat page.tsx : ",error)
+
         //     return new NextResponse("Unauthorized", { status: 401 });
+        //     // router.push("/login");
         // }
 
-        let decodedToken: any = "";
+        const session = await getDataFromToken(req);
 
-        try {
-            const token = cookies().get('token')?. value || '';
-    
-            decodedToken = jwt.verify(token , process.env.JWT_SECRET!)
-            // console.log("data : ", decodedToken.id);
-        
-        } catch (error) { 
-            console.log("Custom Auth failed exception at expertChat page.tsx : ",error)
-
+        if(!session?.id)
+        {
             return new NextResponse("Unauthorized", { status: 401 });
-            // router.push("/login");
         }
 
     
 
-        const identifier = request.url + "-" + decodedToken.id;
+        const identifier = req.url + "-" + session.id;
         const { success } =await rateLimit(identifier);
 
         if(!success) {
             return new NextResponse("Rate limit exceeded", { status: 429 });
         }
-
-        // if(!configuration.apiKey) {
-        //     return new NextResponse("OpenAI API Key not configured", { status: 500 });
-        // }
 
 
         if(!messages) {
@@ -73,17 +71,17 @@ export async function POST(
 
 
 
+        const used = await getApiLimitCount();
         const isPro = await checkSubscription();
 
-        if(!isPro.isPro) {
-            const freeTrial = await checkApiLimit();
 
-            if(!freeTrial)
-            {
-                return new NextResponse("Free trial has expired", { status: 403 });
-            }
+        if(isPro.isPro && (used.tokensUsed >= isPro.tokensAllowed)) {
+            return new NextResponse("Limit reached! Please resubscribe for more.", { status: 403 });
+        } 
+        else if (used.tokensUsed >= MAX_FREE_COUNT)
+        {
+            return new NextResponse("Free trial has ended! Please subscribe for more.", { status: 403 });
         }
-
 
 
         const expert = await prisma.companion.findUnique({
@@ -96,7 +94,7 @@ export async function POST(
                         createdAt: "asc"
                     },
                     where: {
-                        userId: decodedToken.id,
+                        userId: session.id,
                     }
                 },
                 _count: {
@@ -109,8 +107,6 @@ export async function POST(
 
         if(businessId)
         {
-
-        
         const businessData = await prisma.businessProfile.findUnique({
             where: {
                 id: businessId

@@ -1,25 +1,13 @@
 "use client";
 
-// import LoginButton from "./login-button";
-import { Suspense, useState } from "react";
-
+import { useState } from "react";
 import * as z from "zod";
 import React from "react";
 import { Button } from "@/components/ui/button"
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card"
-import { Checkbox } from "@/components/ui/checkbox"
+
 import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
 import { Separator } from "@/components/ui/separator"
 
-import { useToast } from "@/components/ui/use-toast";
 import { useRouter } from "next/navigation";
 
 import axios, { AxiosError } from "axios";
@@ -29,6 +17,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { LoaderIcon } from "lucide-react";
+import { toast } from "sonner";
 
 const formSchema = z.object({
   email: z.string().min(5, {
@@ -47,7 +36,7 @@ const formSchema = z.object({
 export default function SignupForm() {
 
   const router = useRouter();
-  const { toast } = useToast();
+
   const [isLoading, setIsLoading] = useState(false);
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -67,25 +56,16 @@ export default function SignupForm() {
       //Create Expert Functionality
 
       const { data } = await axios.post("/api/authusers/signup", values);
-      toast({
-        description: "Signup Successful."
-      });
+      toast.success("Signup Successful. Please verify your email address.");
 
-      // alert(JSON.stringify(data));
       setIsLoading(false);
       router.refresh();
       router.push("/login");
     }
     catch (e) {
       setIsLoading(false);
-      toast({
-        variant: "destructive",
-        description: "Sign up Failed",
-      });
-
       const error = e as AxiosError;
-
-      // alert(error.message);
+      toast.error(`Sign up Failed! ${error.response?.statusText}`);
     }
   }
 

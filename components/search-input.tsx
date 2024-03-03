@@ -15,7 +15,7 @@ export const SearchInput = () => {
     const name = searchParams.get("name");
 
     const [value, setValue] = useState(name || "");
-    const debouncedValue = useDebounce<string>(value, 500); //Trigger database search after half second
+    const debouncedValue = useDebounce<string>(value, 400); //Trigger database search after half second
 
     const onChange: ChangeEventHandler<HTMLInputElement> = (e) => {
         setValue(e.target.value);

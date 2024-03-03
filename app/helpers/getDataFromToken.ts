@@ -15,7 +15,7 @@ export const getDataFromToken = async (request: NextRequest) => {
             return null;
         }
 
-        console.log('I am')
+        console.log('verifying user in getDataFromToken(req)')
 
         // const decodedToken: any = jwt.verify(token, process.env.JWT_SECRET!);
         const verified = await jwtVerify(token , new TextEncoder().encode(process.env.JWT_SECRET!) )

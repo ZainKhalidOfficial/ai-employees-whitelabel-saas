@@ -35,7 +35,7 @@ export const ExpertChatHeader =  ({
 
     const onDelete = async () => {
         try {
-            await axios.delete(`/api/expert/${expert.id}`);
+            await axios.delete(`/api/customExpert/${expert.id}`);
 
             // toast({
             //     description: "Success."
@@ -83,7 +83,7 @@ export const ExpertChatHeader =  ({
                         </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end">
-                        <DropdownMenuItem onClick={() => router.push(`/expert/${expert.id}`)}>
+                        <DropdownMenuItem onClick={() => router.push(`/customExpert/${expert.id}`)}>
                             <Edit className="w-4 h-4 mr-2" />
                             Edit
                         </DropdownMenuItem>

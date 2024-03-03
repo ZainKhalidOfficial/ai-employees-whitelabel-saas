@@ -1,38 +1,31 @@
-
-
-import { CreateCustomEmployeeButton } from "@/components/create-customEmployee-Button";
 import { CustomExpertsListPage } from "@/components/customExperts";
 import { Suspense } from "react";
 
 
 const customExpertsPage = async () => {
 
-
-
   return (
     <div>
       <div className='mb-8 space-y-4'>
-      <h2 className='text-2xl md:text-4xl font-bold text-center'>
-      Custom Experts
-      </h2>
+        <h2 className='text-2xl md:text-4xl font-bold text-center'>
+          Custom Experts
+        </h2>
 
-      <p className='text-muted-foreground font-light text-sm md:text-lg text-center '>
-        Create your personalized AI Employees with the power of Prompt Engineering
-      </p>
+        <p className='text-muted-foreground font-light text-sm md:text-lg text-center '>
+          Create your personalized AI Employees with the power of Prompt Engineering
+        </p>
       </div>
 
-      <div className="w-full mx-auto m-10 text-center items-center justify-center">
-                               
-      <CreateCustomEmployeeButton />
-
-      </div>
-
-      <Suspense>
-      <CustomExpertsListPage />
+      <Suspense fallback={
+        <div className="flex justify-center items-center gap-2 h-screen">
+          <div className="rounded-md h-12 w-12 md: border-4 border-t-4 border-white animate-spin absolute"></div>
+        </div>
+      }>
+        <CustomExpertsListPage />
       </Suspense>
 
     </div>
-    
+
   )
 }
 

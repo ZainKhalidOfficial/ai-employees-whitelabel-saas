@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Separator } from "@/components/ui/separator"
 
-import { useToast } from "@/components/ui/use-toast";
+// import { useToast } from "@/components/ui/use-toast";
 import { useRouter } from "next/navigation";
 
 import axios, { AxiosError } from "axios";
@@ -17,6 +17,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { LoaderIcon } from "lucide-react";
+import { toast } from "sonner";
 
 
 const formSchema = z.object({
@@ -31,7 +32,7 @@ const formSchema = z.object({
 export default function LoginForm() {
 
     const router = useRouter();
-    const { toast } = useToast();
+    // const { toast } = useToast();
     const [isLoading, setIsLoading] = useState(false);
 
     const form = useForm<z.infer<typeof formSchema>>({
@@ -51,24 +52,24 @@ export default function LoginForm() {
 
 
             // const {data} =  await axios.post("/api/authuser/login", values);
-            await axios.post("/api/authuser/login", values);
-            // toast({
-            //     description : "Success."
-            // });
+            await axios.post("/api/authtenant/login", values);
 
             // alert(JSON.stringify(data));
+            // console.log("msg: ",JSON.stringify(data))
 
             router.refresh();
             router.push("/");
         }
         catch (e) {
             setIsLoading(false);
-            toast({
-                variant: "destructive",
-                description: "Login Failed",
-            });
+            // toast({
+            //     variant: "destructive",
+            //     description: "Login Failed",
+            // });
 
             const error = e as AxiosError;
+            toast.error(`Login Failed! ${error.response?.statusText}`);
+
 
             // alert(error.message);
         }
@@ -90,7 +91,7 @@ export default function LoginForm() {
                             </p>
 
 
-                            <Separator className="bg-primary/10" />
+                            <Separator className="bg-stone-300" />
                         </div>
 
 

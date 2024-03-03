@@ -13,14 +13,14 @@ export async function GET() {
 
         response.cookies.set("token","",{
             httpOnly:true,
-            expires: new Date(0)
+            expires: new Date(Date.now())
         });
 
         return response;
         
     } catch (error: any) {
         return NextResponse.json({error: error.message},
-            {status: 500});
+            {status: 500, statusText: error.message});
     }
     
 }

@@ -25,10 +25,12 @@ interface BusinessProfilesFormProps {
 const formSchema = z.object({
     name: z.string().min(1,{
         message: "Name is required.",
-    } ),
+    } ).max(25,{
+        message: "Name cannot be longer than 20 charaters"}),
     profileData: z.string().min(200,{
         message: "Profile data require atleast 200 characters.",
-    } )
+    } ).max(1500,{
+        message: "Profile data cannot be longer than 1500 charaters"}),
 })
 
 export const BusinessProfilesForm = ({
@@ -62,8 +64,8 @@ export const BusinessProfilesForm = ({
                 description : "Success."
             });
 
+            router.push("/businessProfiles");
             router.refresh();
-            router.push("/businessProfilesPage");
         }
         catch (error) {
             toast({
@@ -88,8 +90,8 @@ export const BusinessProfilesForm = ({
                 description : "Profile deleted successfuly"
             });
             
+            router.push("/businessProfiles");
             router.refresh();
-            router.push("/businessProfilesPage");
         }
         catch (error) {
 

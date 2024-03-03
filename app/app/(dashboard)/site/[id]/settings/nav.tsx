@@ -37,26 +37,28 @@ export default function SiteSettingsNav() {
     },
   ];
 
-      return (
-        <div className="flex border-b border-stone-200 pb-4 pt-2 dark:border-stone-700">
-          <ScrollArea className="w-full py-3 whitespace-nowrap rounded-md border">
-      {navItems.map((item) => (
-        <Link
-          key={item.name}
-          href={item.href}
-          // Change style depending on whether the link is active
-          className={cn(
-            "rounded-md mx-2 px-2 py-1 text-sm font-medium transition-colors active:bg-stone-200 dark:active:bg-stone-600",
-            segment === item.segment
-              ? "bg-stone-100 text-stone-600 dark:bg-stone-800 dark:text-stone-400"
-              : "text-stone-600 hover:bg-stone-100 dark:text-stone-400 dark:hover:bg-stone-800",
-          )}
-        >
-          {item.name}
-        </Link>
-      ))}
-    <ScrollBar orientation="horizontal" />
-    </ScrollArea>
+  return (
+    <div className="flex border-b border-stone-200 pb-4 pt-2 dark:border-stone-700">
+      <ScrollArea className="w-full py-3 overflow-y-hidden whitespace-nowrap rounded-md border">
+        <div className="flex">
+        {navItems.map((item) => (
+          <Link
+            key={item.name}
+            href={item.href}
+            // Change style depending on whether the link is active
+            className={cn(
+              "rounded-md mx-2 p-2 text-sm font-medium transition-colors active:bg-stone-200 dark:active:bg-stone-600",
+              segment === item.segment
+                ? "bg-stone-100 text-stone-600 dark:bg-stone-800 dark:text-stone-400"
+                : "text-stone-600 hover:bg-stone-100 dark:text-stone-400 dark:hover:bg-stone-800",
+            )}
+          >
+            {item.name}
+          </Link>
+        ))}
+        </div>
+        <ScrollBar orientation="horizontal" />
+      </ScrollArea>
     </div>
   );
 }

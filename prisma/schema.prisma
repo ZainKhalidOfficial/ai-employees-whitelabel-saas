@@ -38,6 +38,8 @@ model TenantUser { //User
   verifyToken  String @default("")
   verifyTokenExpiry DateTime @default(now())
 
+  coupon  String?
+
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
   // accounts      Account[]
@@ -96,9 +98,10 @@ model TenantSubscription {
   stripeCurrentPeriodEnd DateTime? @map(name: "stripe_current_period_end")
 
   tier String @default("free")
-  pricePaid Int @default(0)
   sitesAllowed Int @default(1)
+  customEmployees Int @default(0)
   customDomain String @default("No")
+  pricePaid Int @default(0)
   // trial String @default("Yes")
 
   createdAt DateTime @default(now())
@@ -214,18 +217,22 @@ model Example {
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
-model User { //TenantUser
+model User { 
   id           String  @id @default(cuid())
   username     String  @unique
   email        String  @unique
   password     String
+  domain       String
   image        String?
   isVerified   Boolean @default(false)
   isAdmin      Boolean @default(false)
   forgotPasswordToken String @default("")
   forgotPasswordTokenExpiry DateTime @default(now())
+
   verifyToken  String @default("")
   verifyTokenExpiry DateTime @default(now())
+
+  coupon  String?
 }
 
 model UserApiLimit {
@@ -269,6 +276,11 @@ model UserSubscription {
   tokensAllowed Int @default(1000)
   businessProfilesAllowed Int @default(0)
   customEmployeesAllowed Int @default(1000)
+
+  tokensUsed Int @default(0)
+  businessProfilesUsed Int @default(0)
+  customEmployeesUsed Int @default(0)
+
   // categoriesAllowed Category[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -336,4 +348,24 @@ model BusinessProfile {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+model AffiliateUser { 
+  id           String  @id @default(cuid())
+  username     String  @unique
+  email        String  @unique
+  password     String
+  domain       String?
+  image        String?
+  isVerified   Boolean @default(false)
+  forgotPasswordToken String @default("")
+  forgotPasswordTokenExpiry DateTime @default(now())
+  
+  verifyToken  String @default("")
+  verifyTokenExpiry DateTime @default(now())
+
+  coupon  String @default(cuid())
+  commission Int @default(0)
+  paid Int @default(0)
+  couponsApplied Int @default(0)
 }
