@@ -7,7 +7,7 @@ import ThemeToggler from "./ThemeToggler";
 import menuData from "./menuData";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
-
+import { UserCircle2Icon } from "lucide-react";
 const Header = () => {
   const router = useRouter();
 
@@ -26,6 +26,7 @@ const Header = () => {
       setSticky(false);
     }
   };
+
   useEffect(() => {
     window.addEventListener("scroll", handleStickyNavbar);
   });
@@ -63,13 +64,7 @@ const Header = () => {
                   sticky ? "py-5 lg:py-2" : "py-4"
                 } `}
               >
-                {/* <Image
-                  src="/images/logo/logo-2.svg"
-                  alt="logo"
-                  width={140}
-                  height={30}
-                  className="w-full dark:hidden"
-                /> */}
+
                 <Image
                   src="/logo.png"
                   alt="logo"
@@ -81,7 +76,7 @@ const Header = () => {
               </Link>
 
             </div>
-            <div className="flex w-full items-center justify-between px-4">
+            <div className="flex w-full items-center justify-end px-4">
               <div>
                 <button
                   onClick={navbarToggleHandler}
@@ -90,39 +85,39 @@ const Header = () => {
                   className="absolute right-4 top-1/2 block translate-y-[-50%] rounded-lg px-3 py-[6px] ring-primary focus:ring-2 lg:hidden"
                 >
                   <span
-                    className={`relative my-1.5 block h-0.5 w-[30px] bg-black transition-all duration-300 dark:bg-white ${
+                    className={`relative my-1.5 block h-0.5 w-[20px] bg-white transition-all duration-300 dark:bg-white ${
                       navbarOpen ? " top-[7px] rotate-45" : " "
                     }`}
                   />
                   <span
-                    className={`relative my-1.5 block h-0.5 w-[30px] bg-black transition-all duration-300 dark:bg-white ${
+                    className={`relative my-1.5 block h-0.5 w-[20px] bg-white transition-all duration-300 dark:bg-white ${
                       navbarOpen ? "opacity-0 " : " "
                     }`}
                   />
                   <span
-                    className={`relative my-1.5 block h-0.5 w-[30px] bg-black transition-all duration-300 dark:bg-white ${
+                    className={`relative my-1.5 block h-0.5 w-[20px] bg-white  transition-all duration-300 dark:bg-white ${
                       navbarOpen ? " top-[-8px] -rotate-45" : " "
                     }`}
                   />
                 </button>
                 <nav
-                  id="navbarCollapse"
-                  className={`navbar absolute right-0 z-30 w-[250px] rounded border-[.5px] border-body-color/50 bg-white px-6 py-4 duration-300 dark:border-body-color/20 dark:bg-dark lg:visible lg:static lg:w-auto lg:border-none lg:!bg-transparent lg:p-0 lg:opacity-100 ${
-                    navbarOpen
-                      ? "visibility top-full opacity-100"
-                      : "invisible top-[120%] opacity-0"
-                  }`}
-                >
+                id="navbarCollapse"
+                className={`navbar absolute right-0 z-30 w-[250px] rounded border-[.5px] border-body-color/50 bg-black px-6 py-4 duration-300 dark:border-body-color/20 dark:bg-dark lg:visible lg:static lg:w-auto lg:border-none lg:!bg-transparent lg:p-0 lg:opacity-100 ${
+                  navbarOpen
+                    ? "visibility top-full opacity-100"
+                    : "invisible top-[120%] opacity-0"
+                }`}
+              >
                   <ul className="block lg:flex lg:space-x-12">
                     {menuData.map((menuItem, index) => (
                       <li key={index} className="group relative">
                         {menuItem.path ? (
                           <Link
                             href={menuItem.path}
-                            className={`flex py-2 text-base lg:mr-0 lg:inline-flex lg:px-0 lg:py-6 ${
+                            className={`flex py-2 text-lg font-medium lg:mr-0 lg:inline-flex lg:px-0 lg:py-6 ${
                               usePathName === menuItem.path
                                 ? "text-primary dark:text-white"
-                                : "text-dark hover:text-primary dark:text-white/70 dark:hover:text-white"
+                                : "text-white hover:text-primary dark:text-white/70 dark:hover:text-white"
                             }`}
                           >
                             {menuItem.title}
@@ -131,7 +126,7 @@ const Header = () => {
                           <>
                             <p
                               onClick={() => handleSubmenu(index)}
-                              className="flex cursor-pointer items-center justify-between py-2 text-base text-dark group-hover:text-primary dark:text-white/70 dark:group-hover:text-white lg:mr-0 lg:inline-flex lg:px-0 lg:py-6"
+                              className="flex cursor-pointer text-white items-center justify-between py-2 text-lg font-medium group-hover:text-primary dark:text-white/70 dark:group-hover:text-white lg:mr-0 lg:inline-flex lg:px-0 lg:py-6"
                             >
                               {menuItem.title}
                               <span className="pl-3">
@@ -167,27 +162,24 @@ const Header = () => {
                   </ul>
                   
                 </nav>
+
               </div>
               <div className="flex items-center justify-end pr-16 lg:pr-0">
+
+    
                 <Link
                   href={`http://app.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}/login`}
-                  className="hidden px-7 py-3 text-base font-medium text-dark hover:opacity-70 dark:text-white md:block"
+                  className="hidden text-[#605ffc] px-7 py-3 text-lg font-medium text-dark hover:text-indigo-300 md:block"
                 >
-               Sign In
+               <span className="inline-block pr-4">Sign In</span>
+                <UserCircle2Icon className="inline-block " color="#605ffc" size={33} />
                 </Link>
-                <Link
-                  href={`http://app.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}/signup`}
-                    >
-                    {/* part of the link above :> className="ease-in-up shadow-btn hover:shadow-btn-hover hidden rounded-sm bg-primary px-8 py-3 text-base font-medium text-white transition duration-300 hover:bg-opacity-90 md:block md:px-9 lg:px-6 xl:px-9" */}
+
               
-              <Button variant={"premium"}  className="md:text-lg p-4 md:p-6 hidden md:flex lg:flex ease-in-up hover:text-white-50 rounded-full font-semibold">
-                        Sign Up
-                </Button>
-                
-                </Link>
-                <div>
-                  {/* <ThemeToggler /> */}
-                </div>
+
+                {/* <div>
+                  <ThemeToggler />
+                </div> */}
               </div>
             </div>
           </div>

@@ -20,7 +20,7 @@ const LandingLayout = ({
 }
 ) => {  //bg-gradient-to-r from-purple-900 via-indigo-700 to-blue-900 overflow-auto
     return ( 
-        <main className="h-full overflow-auto ${inter.className}" >
+        <main className="h-full bg-black overflow-auto ${inter.className}" >
 
             <Header />
             {children}

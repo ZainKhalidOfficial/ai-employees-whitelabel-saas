@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import axios from "axios";
-import { Zap, CircleDollarSign, Coins, Building2 } from "lucide-react";
+import { Zap, CircleDollarSign, Coins, CheckCircle2, DollarSign } from "lucide-react";
 import { useState } from "react";
 import { toast } from "react-hot-toast";
 
@@ -10,7 +10,6 @@ import { Companion } from "@prisma/client";
 import Image from "next/image";
 import { Card, CardContent, CardFooter, CardHeader } from "./ui/card";
 import Link from "next/link";
-import { Check, PointerIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 
@@ -104,13 +103,13 @@ export const WhitelabelSubscriptionPlan =({
     
     const data = [
         {   id: 1, // this id is used send to stripe for payment processing check button at the end
-            label: 'Startup',
+            label: 'Standard Package',
             // tokens: planData.silverTokens,
             mcost: planData?.mStartupPrice,
             ycost: planData?.yStartupPrice,
             one: 'Create Sub-Domain',
-            two: `Link Custom Domain : ${planData?.mStartupCustomDomains}`,
-            three: `Link Custom Domain : ${planData?.yStartupCustomDomains}`,
+            two: `Link Custom Domain : `, //${planData?.mStartupCustomDomains}
+            three: `Link Custom Domain : `, //${planData?.yStartupCustomDomains}
             four: `Custom Logo + Web App Name`,
             five: `Fixed User Pricing`,
             six:  `10% Fee Cut per User Subscription`,
@@ -121,13 +120,13 @@ export const WhitelabelSubscriptionPlan =({
             color: 'text-sky-500',
         },
         {   id: 2,
-            label: 'Mid-Size',
+            label: 'Premium Package',
             // tokens: planData.goldTokens,
             mcost: planData?.mMidsizePrice,
             ycost: planData?.yMidsizePrice,
             one: 'Create Sub-Domain',
-            two: `Link Custom Domain : ${planData?.mMidsizeCustomDomains}`,
-            three: `Link Custom Domain : ${planData?.yMidsizeCustomDomains}`,
+            two: `Link Custom Domain :`, //${planData?.mMidsizeCustomDomains}
+            three: `Link Custom Domain : `, //${planData?.yMidsizeCustomDomains}
             four: `Custom Logo + Web App Name`,
             five: `Custom User Pricing`,
             six:  `10% Fee Cut per User Subscription`,
@@ -137,36 +136,34 @@ export const WhitelabelSubscriptionPlan =({
             href: '/dashboard',
             color: 'text-sky-500',
         },
-        {   id: 3,
-            label: 'Enterpise',
-            // tokens: planData.platinumTokens,
-            mcost: planData?.mEnterprisePrice,
-            ycost: planData?.yEnterprisePrice,
-            one: 'Create Sub-Domain',
-            two: `Link Custom Domain : ${planData?.mEnterpriseCustomDomains}`,
-            three: `Link Custom Domain : ${planData?.yEnterpriseCustomDomains}`,
-            four: `Custom Logo + Web App Name`,
-            five: `Custom User Pricing + Feature Access`,
-            six:  `10% Fee Cut per User Subscription`,
-            seven: `Link your Stripe Payment Api Key`,
-            eight: `Priority Customer Support`,
-            icon: Building2,
-            href: '/dashboard',
-            color: 'text-sky-500',
-        },
+        // {   id: 3,
+        //     label: 'Enterpise',
+        //     // tokens: planData.platinumTokens,
+        //     mcost: planData?.mEnterprisePrice,
+        //     ycost: planData?.yEnterprisePrice,
+        //     one: 'Create Sub-Domain',
+        //     two: `Link Custom Domain : `, //${planData?.mEnterpriseCustomDomains}
+        //     three: `Link Custom Domain :`, // ${planData?.yEnterpriseCustomDomains}
+        //     four: `Custom Logo + Web App Name`,
+        //     five: `Custom User Pricing + Feature Access`,
+        //     six:  `10% Fee Cut per User Subscription`,
+        //     seven: `Link your Stripe Payment Api Key`,
+        //     eight: `Priority Customer Support`,
+        //     icon: Building2,
+        //     href: '/dashboard',
+        //     color: 'text-sky-500',
+        // },
     
     ]
 
 
     const onClick = async (ordertype: number) => {
-        console.log('Contacting 0!')
-        
-        console.log('Contacting 1!')
+
     if(disabled)
-    { console.log('Contacting! 2')
-        router.push(`http://app.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`);   
+    { console.log('Clicked on Whitelabel Payment Plan from landing')
+        router.push(`http://app.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}/login`);   
     } else {
-        console.log('Contacting!')
+        console.log('Clicked on Whitelabel Payment Plan from Inside')
         let planSelected = {};
         if(ordertype === 1)
         {
@@ -220,39 +217,47 @@ const handleToggle = () => {
   
     return (
             <div  className="flex flex-col items-center">
-        
-
-            
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 py-4">
+                    
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 py-4 gap-x-5">
             {
                 data.map((item) => (
                     <Card
                     key={item.id}
-                    className="bg-slate-200 rounded-xl text-gray-600 cursor-pointer m-2 hover:m-2 hover:bg-black hover:text-white transition"
+                    className="bg-black text-white rounded-3xl cursor-pointer m-2 border border-slate-800 "
                     >
-                            <CardHeader className="flex items-center mb-10 text-center ">
+                            <CardHeader className="flex items-center mb-10 text-center border-b border-slate-800 ">
 
-                                <item.icon className="w-14 h-14" />
-
-                                <p className="text-xl font-bold">
+                                <p className="text-xl font-normal">
                                     {item.label}
                                 </p>
+
+                                <p className="text-6xl -ml-6 font-medium flex ">
+                                <DollarSign/>{item.mcost} 
+                                </p>
+
+                                <p className="text-sm font-light">
+                                    Every Month
+                                </p>
+
+                                {/* <item.icon className="w-14 h-14" /> */}
+
+                                
                                 {/* <p className="text-lg">
                                     {item.tokens} Tokens
                                 </p> */}
 
-                                <p className="text-md font-bold">
+                                {/* <p className="text-md font-bold">
                                 {subscriptionType === 'monthly' ? item.mcost + ' USD' : item.ycost + ' USD'}
-                                </p>
+                                </p> */}
 
 
-                <span className={`text-xl  ${subscriptionType === 'monthly' ? 'text-purple-600 font-semibold' : 'text-purple-700 font-bold'}`}>
+                {/* <span className={`text-xl  ${subscriptionType === 'monthly' ? 'text-purple-600 font-semibold' : 'text-purple-700 font-bold'}`}>
                     {subscriptionType === 'monthly' ? 'Monthly' : 'Yearly'}
-                 </span>
+                 </span> */}
 
       
 
-      <button
+      {/* <button
             className={`relative w-16 h-8 bg-gray-300 rounded-full p-1 transition duration-300 ease-in-out ${
               subscriptionType === 'monthly' ? 'bg-purple-300 ' : 'bg-purple-400'
             }`}
@@ -263,14 +268,19 @@ const handleToggle = () => {
             subscriptionType === 'monthly' ? 'translate-x-1' : 'translate-x-8'
           }`}
         />
-      </button>
+      </button> */}
+
+                            <Button disabled={loading} variant={"default"} className="px-10 mt-10 rounded-full" onClick={() => onClick(item.id)}>
+                                 <p>Signup to Get</p>
+                             </Button>
+
 
                             </CardHeader>
 
                             <CardContent className="pl-20 space-y-2 mb-10 ">
 
                             <div className="flex">
-                                 <Check className={"h-5 w-5 mr-3 text-emerald-600 "} />
+                            <CheckCircle2 className={"h-5 w-5 mr-3 text-black"} fill="#7075F3" />
                                 <p className="text-md">
                                     {item.one}
                                 </p>
@@ -278,42 +288,42 @@ const handleToggle = () => {
 
 
                             <div className="flex">
-                                 <Check className={"h-5 w-5 mr-3 text-emerald-600"} />
+                            <CheckCircle2 className={"h-5 w-5 mr-3 text-black"} fill="#7075F3" />
                                 <p className="text-md">
                                 {subscriptionType === 'monthly' ? (item.two)  : item.three } 
                                 </p>
                             </div>
 
                             <div className="flex">
-                                 <Check className={"h-5 w-5 mr-3 text-emerald-600"} />
+                            <CheckCircle2 className={"h-5 w-5 mr-3 text-black"} fill="#7075F3" />
                                 <p className="text-md">
                                     {item.four}
                                 </p>
                             </div>
 
                             <div className="flex">
-                                 <Check className={"h-5 w-5 mr-3 text-emerald-600"} />
+                            <CheckCircle2 className={"h-5 w-5 mr-3 text-black"} fill="#7075F3" />
                                 <p className="text-md">
                                     {item.five}
                                 </p>
                             </div>
 
                             <div className="flex">
-                                 <Check className={"h-5 w-5 mr-3 text-emerald-600"} />
+                            <CheckCircle2 className={"h-5 w-5 mr-3 text-black"} fill="#7075F3" />
                                 <p className="text-md">
                                     {item.six}
                                 </p>
                             </div>
 
                             <div className="flex">
-                                 <Check className={"h-5 w-5 mr-3 text-emerald-600"} />
+                            <CheckCircle2 className={"h-5 w-5 mr-3 text-black"} fill="#7075F3" />
                                 <p className="text-md">
                                     {item.seven}
                                 </p>
                             </div>
 
                             <div className="flex">
-                                 <Check className={"h-5 w-5 mr-3 text-emerald-600"} />
+                                 <CheckCircle2 className={"h-5 w-5 mr-3 text-black"} fill="#7075F3" />
                                 <p className="text-md">
                                     {item.eight}
                                 </p>
@@ -323,10 +333,7 @@ const handleToggle = () => {
                              
                         
 
-                             <Button disabled={loading} variant={isPro.isPro ? "default" : "premium"} className="px-10 rounded-full" onClick={() => onClick(item.id)}>
-                                 <p>Get Now</p>
-                                <Zap className="w-4 h-4 ml-2 fill-white" />
-                             </Button>
+                             
 
                             </CardFooter>
                         
