@@ -83,14 +83,14 @@ export default async function Home() {
         <p className="text-[#7075F3] text-2xl pl-6 font-bold text-start md:my-2 "> • Customize Your Brand</p>
         <p className="text-[#7075F3] text-2xl pl-6 font-bold text-start md:my-2 "> • Get a Domain</p>
         <p className="text-[#7075F3] text-2xl pl-6 font-bold text-start md:my-2 "> • Choose Payment Method</p>
-        <p className="text-white text-xl text-start lg:text-start md:mt-8 ">and you're set. In just days, you'll be ready to sell a cutting-edge advanced AI software without the struggle or complexity. It's the future of AI, simplified for everyone.</p>         
+        <p className="text-white text-xl text-start lg:text-start md:mt-8 ">and you&#39;re set. In just days, you&#39;ll be ready to sell a cutting-edge advanced AI software without the struggle or complexity. It&#39;s the future of AI, simplified for everyone.</p>         
      
         </div>
       </div>
 
       <div id="how" className="grid mb-20 gap-y-10 py-8 grid-cols-1 text-center ">
       <p className="font-semibold text-4xl lg:text-5xl text-center text-white  "> 
-      Here's How <span className="text-[#7075F3]">Your AI Company</span> Works</p>
+      Here&#39;s How <span className="text-[#7075F3]">Your AI Company</span> Works</p>
       <WhitelabelFeaturePlan />
         </div>
 
@@ -157,7 +157,7 @@ export default async function Home() {
       <div className="flex my-8 items-center justify-center lg:h-screen flex-grow">
         <div className="w-2/3 grid grid-cols-1 lg:block lg:grid-cols-none">
         <p className="font-bold mb-36 text-7xl text-center text-white  "> <span className="text-[#7075F3]">Unlock</span> The Future of AI</p>
-        <p className="text-white text-2xl text-center lg:text-start my-8 ">We are rapidly entering an AI-driven world, every company needs a guide. With your Advanced AI Company, you're that bridge. We handle the tech, you bring businesses into the AI age. Dive into a life of pure profits and freedom, and let businesses thrive with your help</p>         
+        <p className="text-white text-2xl text-center lg:text-start my-8 ">We are rapidly entering an AI-driven world, every company needs a guide. With your Advanced AI Company, you&#39;re that bridge. We handle the tech, you bring businesses into the AI age. Dive into a life of pure profits and freedom, and let businesses thrive with your help</p>         
         
         <Link className="p-3 text-2xl md:text-2xl font-normal  text-center text-black bg-[#7075F3] hover:bg-white rounded-full" 
               href={`http://app.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}/login`}>Get Started</Link>
